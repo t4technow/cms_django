@@ -1,0 +1,723 @@
+{% load static %}
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>T4 Mag</title>
+
+    <meta name="description"
+        content="Looking for Tech based news, solutions or looking for softwares or best android applications? T4Technow is just the place.">
+
+    <link rel="stylesheet" type="text/css" href="{% static 'css/bootstrap.min.css' %}">
+    <link rel="stylesheet" type="text/css" href="{% static 'css/all.min.css' %}">
+    <link rel="stylesheet" type="text/css" href="{% static 'css/animate.min.css' %}">
+    <link rel="stylesheet" type="text/css" href="{% static 'css/swiper.min.css' %}">
+    <link rel="stylesheet" type="text/css" href="{% static 'css/magnific-popup.css' %}">
+
+    <!-- Custom Css -->
+    <link rel="stylesheet" type="text/css" href="{% static 'css/style.css' %}">
+
+</head>
+
+<body>
+
+    <!-- Start wrapper -->
+    <div id="wrapper" class="wrapper">
+
+        <!-- start perloader -->
+        <!-- <div class="pre-loader" id="preloader">
+            <div class="loader"></div>
+        </div> -->
+        <!-- end perloader -->
+
+        <!-- Start main-content -->
+        <div id="main_content" class="footer-fixed">
+
+            <!-- Header -->
+            <header class="rt-header sticky-on">
+
+                <!-- sticky-placeholder -->
+                <div id="sticky-placeholder"></div>
+
+                <!-- start  topbar -->
+                <div class="topbar topbar-style-1" id="topbar-wrap">
+                    <div class="container">
+                        <div class="row align-items-center">
+
+                            <div class="col-lg-7">
+                                <div class="rt-trending rt-trending-style-1">
+                                    <p class="trending-title">
+                                        <i class="fas fa-bolt icon"></i>
+                                        Trending
+                                    </p>
+                                    <div class="rt-treding-slider1 swiper-container">
+                                        <div class="swiper-wrapper">
+
+                                            {% for post in trending_posts %}
+
+                                            <div class="swiper-slide">
+                                                <div class="item">
+                                                    <p class="trending-slide-title">
+                                                        {{ post.title }}
+                                                    </p>
+                                                </div>
+                                            </div>
+
+
+                                            {% endfor %}
+
+                                        </div>
+                                    </div>
+                                </div>
+                            </div>
+                            <!-- end col -->
+
+                            <div class="col-lg-5">
+                                <div class="rt-topbar-right">
+                                    <div class="meta-wrap">
+                                        <span class="rt-meta">
+                                            <i class="far fa-calendar-alt icon"></i>
+                                            <span class="currentDate">
+                                                DECEMBER 9, 2022
+                                            </span>
+                                        </span>
+                                    </div>
+                                    <div class="social-wrap d-none d-xl-block">
+                                        <ul class="rt-top-social">
+                                            <li class="follow">Follow Us:</li>
+                                            <li>
+                                                <a href="https://www.facebook.com/" target="_blank">
+                                                    <i class="fab fa-facebook-f"></i>
+                                                </a>
+                                            </li>
+                                            <li>
+                                                <a href="https://twitter.com/" target="_blank">
+                                                    <i class="fab fa-twitter"></i>
+                                                </a>
+                                            </li>
+                                            <li>
+                                                <a href="https://www.linkedin.com/" target="_blank">
+                                                    <i class="fab fa-linkedin-in"></i>
+                                                </a>
+                                            </li>
+                                            <li><a href="https://www.pinterest.com/" target="_blank">
+                                                    <i class="fab fa-pinterest-p"></i>
+                                                </a>
+                                            </li>
+                                            <li>
+                                                <a href="https://www.whatsapp.com/" target="_blank">
+                                                    <i class="fab fa-skype"></i>
+                                                </a>
+                                            </li>
+                                        </ul>
+                                    </div>
+
+                                </div>
+                            </div>
+                            <!-- end col -->
+
+                        </div>
+                        <!-- end row -->
+                    </div>
+                    <!-- end container -->
+                </div>
+                <!-- end topbar -->
+
+                <!-- Header Main -->
+                <div class="header-main header-main-style-1 navbar-wrap" id="navbar-wrap">
+                    <div class="container">
+                        <div class="row">
+                            <div class="d-flex align-items-center justify-content-between">
+
+                                <!-- start logo here -->
+                                <div class="site-branding">
+                                    <a class="dark-logo" href="{% url 'home' %}">
+                                        <img width="162" height="52" src="{% static 'images/logo/logo-dark.png' %}"
+                                            alt="T4Technow">
+                                    </a>
+                                    <a class="light-logo" href="{% url 'home' %}">
+                                        <img width="162" height="52" src="{% static 'images/logo/logo-light.png' %}"
+                                            alt="T4Technow">
+                                    </a>
+                                </div>
+                                <!-- end logo here -->
+
+                                <!-- start main menu -->
+                                <div class="main-menu">
+                                    <nav class="main-menu__nav">
+                                        <ul>
+                                            <li class="list active">
+                                                <a class="animation" href="{% url 'home' %}">Home</a>
+                                            </li>
+                                            <li class="main-menu__nav_sub list">
+                                                <a class="animation" href="javascript:void(0)">Top X</a>
+                                                <ul class="main-menu__dropdown">
+                                                    <li class="main-menu__nav_sub">
+                                                        <a href="javascript:void(0)">
+                                                            Posts
+                                                        </a>
+                                                        <ul>
+                                                            
+                                                            {% for post in posts %}
+                                                                <li><a href="{% url 'post_details' post.slug %}">{{post.slug}}</a></li>
+                                                            {% endfor %}
+                                                                
+                                                        </ul>
+                                                    </li>
+                                                    <li class="main-menu__nav_sub">
+                                                        <a href="javascript:void(0)">
+                                                            Authors
+                                                        </a>
+                                                        <ul>
+                                                            {% for author in contributors %}
+                                                            <a href="">
+                                                                
+                                                                {% if author.name %}
+                                                                    {{author.name}}
+                                                                    {% else %}
+                                                                    {{author.user_id.first_name}} {{ author.user_id.last_name }}
+                                                                {% endif %}
+                                                                    
+                                                            </a>
+                                                            {% endfor %}
+                                                                
+                                                        </ul>
+                                                    </li>
+                                                </ul>
+                                            </li>
+                                            <li class="main-menu__nav_sub list">
+                                                <a class="animation" href="javascript:void(0)">Categories </a>
+                                                <ul class="main-menu__dropdown">
+                                                    
+                                                    {% for category in categories %}
+                                                        <li><a href=" {% url 'categories' %} ">{{ category.title }}</a></li>
+                                                    {% endfor %}
+                                                        
+                                                </ul>
+                                            </li>
+                                            <li class="main-menu__nav_sub list">
+                                                <a class="animation" href="javascript:void(0)">Pages</a>
+                                                <ul class="main-menu__dropdown">
+                                                    
+                                                    {% for page in pages %}
+                                                        <li><a href=" {% url 'post_details' page.slug %} "> {{ page.title }} </a></li>
+                                                    {% endfor %}
+                                                        
+
+                                                </ul>
+                                            </li>
+                                        </ul>
+                                    </nav>
+                                </div>
+                                <!-- end main menu -->
+
+                                <!-- start header actions -->
+                                <ul class="header-action-items">
+                                    <li class="item">
+                                        <a href="#template-search"><i class="fas fa-search"></i></a>
+                                    </li>
+                                    <li class="main-menu__nav_sub list">
+                                        <a class="animation" href="javascript:void(0)">
+                                            
+                                            {% if user.is_authenticated %}
+                                                
+                                                {% if user.profile_pic %}
+                                                    <img src="{{user.profile_pic.url}}" alt="" class="user-image circle">
+                                                    {% else %}
+                                                    <i class="far fa-user-circle"></i>
+                                                {% endif %}
+                                                    
+                                                {% else %}
+                                                <i class="far fa-user-circle"></i>
+
+                                            {% endif %}
+                                        </a>
+                                        <ul class="main-menu__dropdown">
+                                            
+                                            {% if user.is_authenticated %}
+                                                <li><a href="{% url 'user_profile' request.user.id %}">Profile</a></li>
+                                                <li><a href="">Following Authors</a></li>
+                                                
+                                                {% if user.is_author or user.is_superuser %}
+                                                    <li><a href="">Author Dashboard</a></li>
+                                                    
+                                                    {% else %}
+
+                                                    <li><a href="{% url 'become_author' %}">Become an author</a></li>
+                                                {% endif %}
+
+                                                
+                                                {% if user.is_superuser %}
+                                                <li><a href="{% url 'admin_posts' %}">Admin Dashboard</a></li>
+                                                {% endif %}
+                                                    
+                                                    
+                                                <li><a href="{% url 'user_logout' %}">Logout</a></li>
+                                            
+                                            {% else %}
+                                            
+                                                <li><a href="{% url 'user_login' %}">Login</a></li>
+                                                <li><a href="{% url 'user_registration' %}">Become a member</a></li>
+                                                <li><a href="{% url 'admin_login' %}">Admin</a></li>
+
+                                            {% endif %}
+                                        </ul>
+                                    </li>
+                                    <!-- <li class="item cart-icon">
+                                        <a href="javascript:void(0)" class="user-menu-btn menu-open-btn">
+                                            
+                                            <span class="item-count">0</span>
+                                        </a>
+                                    </li> -->
+                                    <li class="item humburger offcanvas-menu-btn menu-status-open">
+                                        <span></span>
+                                    </li>
+                                </ul>
+                                <!-- end header actions -->
+
+                            </div>
+                        </div>
+                        <!-- end row -->
+                    </div>
+                    <!-- end container -->
+                </div>
+                <!-- End Header Main -->
+
+            </header>
+            <!-- end header -->
+
+            <!-- start rt-mobile-header -->
+            <div class="rt-mobile-header mobile-sticky-on">
+
+                <div id="mobile-sticky-placeholder"></div>
+                <!-- end mobile-sticky-placeholder -->
+
+                <div class="mobile-top-bar" id="mobile-top-bar">
+                    <ul class="mobile-top-list">
+                        <li>
+                            <span class="rt-meta">
+                                <i class="far fa-calendar-alt icon"></i>
+                                <span class="currentDate">FEBRUARY 26, 2023</span>
+                            </span>
+                        </li>
+                        <li>
+                            <span class="rt-meta">
+                                <i class="fas fa-map-marker-alt icon"></i>
+                                Chicago 12, Melborne City, USA
+                            </span>
+                        </li>
+                    </ul>
+                </div>
+                <!-- end mobile-top-bar -->
+
+                <div class="mobile-menu-bar-wrap" id="mobile-menu-bar-wrap">
+                    <div class="mobile-menu-bar">
+                        <div class="logo">
+                            <a href="{% url 'home' %}">
+                                <img src="{% static 'images/logo/logo-dark.png' %}" alt="T4Technow" width="162" height="52">
+                            </a>
+                        </div>
+                        <span class="sidebarBtn">
+                            <span class="bar"></span>
+                            <span class="bar"></span>
+                            <span class="bar"></span>
+                            <span class="bar"></span>
+                        </span>
+                    </div>
+                    <div class="rt-slide-nav">
+                        <div class="offscreen-navigation">
+                            <nav class="menu-main-primary-container">
+                                <ul class="menu">
+                                    <li class="list">
+                                        <a class="animation" href="{% url 'home' %}">Home</a>
+                                    </li>
+                                    <li class="list menu-item-has-children">
+                                        <a class="animation" href="javascript:void(0)">Features</a>
+                                        <ul class="main-menu__dropdown sub-menu">
+                                            <li class="list menu-item-has-children">
+                                                <a href="javascript:void(0)">
+                                                    Post Layout
+                                                </a>
+                                                <ul class="main-menu__dropdown sub-menu">
+                                                    <li><a href="single-post1.html">Single Post 01</a></li>
+                                                    <li><a href="single-post2.html">Single Post 02</a></li>
+                                                    <li><a href="single-post3.html">Single Post 03</a></li>
+                                                </ul>
+                                            </li>
+                                            <li><a href="author.html">Author Deatils</a></li>
+                                        </ul>
+
+                                    </li>
+                                    <li class="list menu-item-has-children">
+                                        <a class="animation" href="javascript:void(0)">Categories</a>
+                                        <ul class="main-menu__dropdown sub-menu">
+                                            <li><a href="life-style.html">Life Style</a></li>
+                                            <li><a href="technology.html">Technology</a></li>
+                                            <li><a href="gaming.html">Gaming</a></li>
+                                            <li><a href="graphics.html">Graphics</a></li>
+                                            <li><a href="politics.html">Politics</a></li>
+                                        </ul>
+                                    </li>
+                                    <li class="list menu-item-has-children">
+                                        <a class="animation" href="javascript:void(0)">Pages</a>
+                                        <ul class="main-menu__dropdown sub-menu">
+                                            <li><a href="about.html">About Us</a></li>
+                                            <li><a href="contact.html">Contact Us</a></li>
+                                            <li><a href="404.html">404</a></li>
+
+                                        </ul>
+                                    </li>
+                                    <li class="list menu-item-has-children">
+                                        <a class="animation" href="javascript:void(0)">Shop</a>
+                                        <ul class="main-menu__dropdown sub-menu">
+                                            <li><a href="shop.html">Shop</a></li>
+                                            <li><a href="single-shop.html">Shop Deatils</a></li>
+                                        </ul>
+                                    </li>
+                                </ul>
+                            </nav>
+                        </div>
+                    </div>
+                </div>
+
+
+
+            </div>
+            <!-- end rt-mobile-header -->
+
+            <!-- Start Main -->
+            <main>
+
+                {% block content %}
+
+                {% endblock content %}
+
+
+            </main>
+            <!-- End Main -->
+
+            <!-- Start Footer -->
+            <footer class="footer">
+
+                <div class="footer-top footer-style-1">
+                    <div class="container">
+                        <div class="row gutter-30">
+
+                            <div class="col-xl-3 col-md-6 wow fadeInUp" data-wow-delay="200ms"
+                                data-wow-duration="800ms">
+                                <div class="footer-widget">
+                                    <div class="logo footer-logo">
+                                        <a class="dark-logo" href="{% url 'home' %}">
+                                            <img width="162" height="52" src="{% static 'images/logo/logo-light.png' %}" alt="T4Technow">
+                                        </a>
+                                    </div>
+                                    <p class="text">
+                                        When an unknown printer took a galley
+                                        and scrambled it to make specimen
+                                        book not only five centurie.
+                                    </p>
+                                    <ul class="footer-social gutter-15">
+                                        <li class="social-item">
+                                            <a href="https://www.facebook.com/" class="social-link fb" target="_blank">
+                                                <i class="fab fa-facebook-f"></i>
+                                            </a>
+                                        </li>
+                                        <li class="social-item">
+                                            <a href="https://twitter.com/" class="social-link tw" target="_blank">
+                                                <i class="fab fa-twitter"></i>
+                                            </a>
+                                        </li>
+                                        <li class="social-item">
+                                            <a href="https://vimeo.com/" class="social-link vm" target="_blank">
+                                                <i class="fab fa-vimeo-v"></i>
+                                            </a>
+                                        </li>
+                                        <li class="social-item">
+                                            <a href="https://www.pinterest.com/" class="social-link pn" target="_blank">
+                                                <i class="fab fa-pinterest-p"></i>
+                                            </a>
+                                        </li>
+                                        <li class="social-item">
+                                            <a href="https://www.whatsapp.com/" class="social-link wh" target="_blank">
+                                                <i class="fab fa-whatsapp"></i>
+                                            </a>
+                                        </li>
+                                    </ul>
+                                </div>
+                            </div>
+                            <!-- end col -->
+
+                            <div class="col-xl-3 col-md-6 wow fadeInUp" data-wow-delay="400ms"
+                                data-wow-duration="800ms">
+                                <div class="footer-widget">
+                                    <h3 class="footer-widget-title">Recent Posts</h3>
+
+                                    <!--  start footer-post-list -->
+                                    <div class="footer-post-list">
+                                        
+                                        {% for post in trending_posts %}
+
+                                        
+                                            {% if forloop.counter < 3 %}
+                                            <div class="item mb--30">
+                                                <div class="rt-post post-sm white-style circular-sm">
+                                                    <div class="post-img">
+                                                        <a href=" {% url 'post_details' post.slug %} ">
+                                                            <img src="{{ post.featured_image.url }}" alt="{{post.title}}">
+                                                        </a>
+                                                    </div>
+                                                    <div class="ms-3 post-content">
+                                                        <h4 class="post-title">
+                                                            <a href="{% url 'post_details' post.slug %}">
+                                                                {{ post.title }}
+                                                            </a>
+                                                        </h4>
+                                                        <span class="rt-meta">
+                                                            <i class="far fa-calendar-alt icon"></i>
+                                                            {{ post.updated_at }}
+                                                        </span>
+                                                    </div>
+                                                </div>
+                                            </div>
+                                            {% endif %}
+
+                                        {% endfor %}
+                                            
+
+                                    </div>
+                                    <!--  end footer-post-list -->
+
+                                </div>
+                            </div>
+                            <!-- end col -->
+
+                            <div class="col-xl-3 col-md-6 wow fadeInUp d-flex justify-content-xl-center justify-content-start"
+                                data-wow-delay="400ms" data-wow-duration="800ms">
+                                <div class="footer-widget">
+                                    <h3 class="footer-widget-title">Categories</h3>
+                                    <ul class="widget-list cat-list">
+                                        
+                                        {% for category in categories %}
+                                        <li class="widget-list-item">
+                                            <a href=" {% url 'single_category' category.slug %} " class="widget-list-link">
+                                                {{ category.title }}
+                                            </a>
+                                        </li>
+                                        {% endfor %}
+                                            
+                                    </ul>
+                                </div>
+                            </div>
+                            <!-- end col -->
+
+                            <div class="col-xl-3 col-md-6 wow fadeInUp" data-wow-delay="600ms"
+                                data-wow-duration="800ms">
+                                <div class="footer-widget">
+                                    <h3 class="footer-widget-title">Contributors</h3>
+                                    <div class="insta-gallery">
+                                        
+                                        {% for contributor in contributors %}
+
+                                        <div class="galleryitem">
+                                            <a href="">
+                                                <img src="{{contributor.profile_pic.url}}" width="100" height="90"
+                                                    alt="gallery1">
+                                            </a>
+                                        </div>
+                                        
+                                        {% endfor %}
+                                        
+                                    </div>
+                                </div>
+                            </div>
+                            <!-- end col -->
+
+                        </div>
+                    </div>
+                </div>
+                <!-- End footer top -->
+
+                <div class="footer-bottom">
+                    <div class="container">
+                        <div class="footer-bottom-area d-flex align-items-center justify-content-center">
+                            <p class="copyright-text mb-0 wow fadeInUp" data-wow-delay="200ms"
+                                data-wow-duration="800ms">
+                                <span class="currentYear"></span> © T4Mag all right reserved by
+                                <a href="https://t4technow.tk/" rel="nofollow">T4Technow</a>
+                            </p>
+                        </div>
+                    </div>
+                </div>
+                <!-- End footer bottom -->
+
+            </footer>
+            <!-- End  Footer -->
+
+        </div>
+        <!-- End main-content -->
+
+        <!-- Start  offcanvas menu -->
+        <div class="offcanvas-menu-wrap" id="offcanvas-wrap" data-position="left">
+
+            <div class="offcanvas-content">
+                <div class="offcanvas-header">
+                    <div class="offcanvas-logo">
+                        <div class="site-branding">
+                            <a class="dark-logo" href="{% url 'home' %}"><img width="162" height="52"
+                                    src="{% static 'images/logo/logo-dark.png' %}" alt="T4Technow"></a>
+                            <a class="light-logo" href="{% url 'home' %}"><img width="162" height="52"
+                                    src="{% static 'images/logo/logo-light.png' %}" alt="T4Technow"></a>
+                        </div>
+                    </div>
+                    <div class="close-btn offcanvas-close">
+                        <a href="javascript:void(0)">
+                            <i class="fas fa-times"></i>
+                        </a>
+                    </div>
+                </div>
+
+                <div class="offcanvas-widget">
+                    <h3 class="offcanvas-widget-title">About Us</h3>
+                    <p>
+                        The argument in favor of using filler text
+                        goes something like this: If you use arey
+                        real content in the Consulting Process
+                        anytime you reachtent.
+                    </p>
+                </div>
+
+                <div class="offcanvas-widget">
+                    <h3 class="offcanvas-widget-title">Instagram</h3>
+                    <div class="insta-gallery">
+                        <div class="galleryitem">
+                            <a href="https://www.instagram.com/">
+                                <img src="media/gallery/ins-gallery_1.jpg" width="100" height="90" alt="gallery1">
+                            </a>
+                        </div>
+                        <div class="galleryitem">
+                            <a href="https://www.instagram.com/">
+                                <img src="media/gallery/ins-gallery_2.jpg" width="100" height="90" alt="gallery2">
+                            </a>
+                        </div>
+                        <div class="galleryitem">
+                            <a href="https://www.instagram.com/">
+                                <img src="media/gallery/ins-gallery_3.jpg" width="100" height="90" alt="gallery3">
+                            </a>
+                        </div>
+                        <div class="galleryitem">
+                            <a href="https://www.instagram.com/">
+                                <img src="media/gallery/ins-gallery_4.jpg" width="100" height="90" alt="gallery4">
+                            </a>
+                        </div>
+                        <div class="galleryitem">
+                            <a href="https://www.instagram.com/">
+                                <img src="media/gallery/ins-gallery_5.jpg" width="100" height="90" alt="gallery5">
+                            </a>
+                        </div>
+                        <div class="galleryitem">
+                            <a href="https://www.instagram.com/">
+                                <img src="media/gallery/ins-gallery_6.jpg" width="100" height="90" alt="gallery6">
+                            </a>
+                        </div>
+                    </div>
+                </div>
+
+                <div class="offcanvas-widget footer-widget">
+                    <h3 class="offcanvas-widget-title">Contact Info</h3>
+                    <ul class="contact-info-list widget-list">
+                        <li class="widget-list-item">
+                            <i class="fas fa-map-marker-alt list-icon"></i>
+                            Chicago 12, Melborne City, USA
+                        </li>
+                        <li class="widget-list-item">
+                            <i class="fas fa-phone-alt list-icon"></i>
+                            <a href="tel:123333000999" class="widget-list-link">
+                                (123) 333-000-999
+                            </a>
+                        </li>
+                        <li class="widget-list-item">
+                            <i class="fas fa-envelope list-icon"></i>
+                            <a href="mailto:info@example.com" class="widget-list-link">
+                                T4Technow@gmail.com
+                            </a>
+                        </li>
+                    </ul>
+                    <ul class="footer-social style-2 gutter-15">
+                        <li class="social-item">
+                            <a href="https://www.facebook.com/" class="social-link fb" target="_blank">
+                                <i class="fab fa-facebook-f"></i>
+                            </a>
+                        </li>
+                        <li class="social-item">
+                            <a href="https://twitter.com/" class="social-link tw" target="_blank">
+                                <i class="fab fa-twitter"></i>
+                            </a>
+                        </li>
+                        <li class="social-item">
+                            <a href="https://vimeo.com/" class="social-link vm" target="_blank">
+                                <i class="fab fa-vimeo-v"></i>
+                            </a>
+                        </li>
+                        <li class="social-item">
+                            <a href="https://www.pinterest.com/" class="social-link pn" target="_blank">
+                                <i class="fab fa-pinterest-p"></i>
+                            </a>
+                        </li>
+                        <li class="social-item">
+                            <a href="https://www.whatsapp.com/" class="social-link wh" target="_blank">
+                                <i class="fab fa-whatsapp"></i>
+                            </a>
+                        </li>
+                    </ul>
+                </div>
+            </div>
+        </div>
+        <!-- End  offcanvas menu -->
+
+        <!-- theme-switch-box -->
+        <div class="theme-switch-box-wrap">
+            <div class="theme-switch-box">
+                <span class="theme-switch-box__theme-status"><i class="fas fa-cog"></i></span>
+                <label class="theme-switch-box__label" for="themeSwitchCheckbox">
+                    <input class="theme-switch-box__input" type="checkbox" name="themeSwitchCheckbox"
+                        id="themeSwitchCheckbox">
+                    <span class="theme-switch-box__main"></span>
+                </label>
+                <span class="theme-switch-box__theme-status"><i class="fas fa-moon"></i></span>
+            </div>
+        </div>
+        <!-- end theme-switch-box -->
+
+        <!-- start back to top -->
+        <a href="javascript:void(0)" id="back-to-top">
+            <i class="fas fa-angle-double-up"></i>
+        </a>
+        <!-- End back to top -->
+
+    </div>
+    <!-- End wrapper -->
+
+
+    <!-- Dependency Scripts -->
+    <script src="{% static 'js/jquery.min.js' %}"></script>
+    <script src="{% static 'js/popper.min.js' %}"></script>
+    <script src="{% static 'js/bootstrap.min.js' %}"></script>
+    <script src="{% static 'js/appear.min.js' %}"></script>
+    <script src="{% static 'js/swiper.min.js' %}"></script>
+    <script src="{% static 'js/masonry.min.js' %}"></script>
+    <script src="{% static 'js/magnific-popup.min.js' %}"></script>
+    <script src="{% static 'js/resize-sensor.min.js' %}"></script>
+    <script src="{% static 'js/theia-sticky-sidebar.min.js' %}"></script>
+    <script src="{% static 'js/validator.min.js' %}"></script>
+    <script src="{% static 'js/tween-max.js' %}"></script>
+    <script src="{% static 'js/lazysizes.min.js' %}"></script>
+    <script src="{% static 'js/wow.min.js' %}"></script>
+
+    <!-- Dependency Script -->
+    <script src="{% static 'js/app.js' %}"></script>
+</body>
+
+</html>

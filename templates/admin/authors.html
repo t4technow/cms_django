@@ -1,0 +1,18 @@
+{% extends 'dashboard.html' %}
+
+
+{% block content %}
+<a href="{% url 'admin_author_create' %}">Add New Author</a>
+<br>
+    {% for author in authors %}
+    <li>
+        <a href="{% url 'admin_author_update' author.user_id.id %}">
+            {{author.name}}
+        </a>
+        <br>
+        <a href="{% url 'admin_block_author' author.user_id.id %}">Block</a>
+    </li>
+    
+    {% endfor %}
+{% endblock content %}
+    

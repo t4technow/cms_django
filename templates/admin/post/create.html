@@ -1,0 +1,66 @@
+{% extends 'dashboard.html' %}
+
+
+{% block content %}
+<form action="" method="post" enctype="multipart/form-data">
+{% csrf_token %}
+<div class="content-holder d-flex">
+    
+    <div class="content">
+            <div class="form-outline mb-4 d-flex">
+                <label class="title" for="post_title">Post Title</label>
+                {{ form.title }}
+            </div>
+            {{ form.errors }}
+            <div class="form-outline mb-4">
+                {{ form.body }}
+            </div>
+    </div>
+
+    <div class="filter create">
+        <div class="section-heading form-outline d-flex mb-4">
+            <h6 class="title">
+                Summary
+            </h6>
+            <input type="submit" value="Save" class="btn btn-primary">
+        </div>
+
+        <div class="form-outline mb-4 d-flex">
+            <label class="me-4" for="post_title">Visibility</label>
+            {{ form.visibility }}
+        </div>
+
+        <div class="form-outline mb-4 d-flex">
+            <label class="me-4" for="slug">URL</label>
+            {{ form.slug }}
+        </div>
+
+        <div class="form-outline mb-4 d-flex">
+            <label class="me-4" for="category">Category</label>
+            {{ form.category }}
+        </div>
+
+        <div class="form-outline mb-4">
+            <label class="me-4" for="tags">Tags</label>
+            {{ form.tags }}
+        </div>
+
+        <div class="form-outline mb-4">
+            <label class="me-4" for="featured_image">Featured Image</label>
+            {{ form.featured_image }}
+        </div>
+
+        <div class="form-outline mb-4">
+            <label class="me-4" for="post_title">Excerpt</label>
+            {{ form.excerpt }}
+        </div>
+
+        <div class="form-outline mb-4">
+            <label class="me-4" for="post_title">Allow Comments</label>
+            {{ form.allow_comments }}
+        </div>
+    </div>
+</div>
+</form>
+
+{% endblock content %}

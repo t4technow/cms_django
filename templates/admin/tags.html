@@ -1,0 +1,17 @@
+{% extends 'dashboard.html' %}
+
+
+{% block content %}
+<a href="{% url 'admin_tag_create' %}">Add New tag</a>
+<br>
+    {% for tag in tags %}
+    <li>
+        <a href=" {% url 'admin_tag_update' tag.slug %} ">
+            {{tag.title}}
+        </a>
+        <br>
+        <a href=" {% url 'admin_tag_delete' tag.slug %}">Delete tag</a>
+    </li>
+    
+    {% endfor %}
+{% endblock content %}

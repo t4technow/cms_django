@@ -1,0 +1,143 @@
+{% extends 'dashboard.html' %}
+
+
+{% block content %}
+<div class="main-section-header d-flex">
+    <h5 class="title">All Posts</h5>
+    <a href="{% url 'admin_post_create' %}" class="btn btn-add">
+        Add Post
+    </a>
+</div> 
+
+<div class="content-holder d-flex">
+    <div class="filter">
+        <div class="section-heading">
+            <h6 class="title">
+                FILTER
+            </h6>
+        </div>
+
+        <div class="authors">
+            <div class="section-heading">
+                <h6 class="title">
+                    Authors
+                </h6>
+            </div>
+
+                <ul class="filter-list">
+                    
+                    {% for author in contributors %}
+                        
+                        {% if author.is_approved %}
+                        
+                            <li>
+                                <a href="" class="d-flex">
+                                    <span class="label">{{ author.name }}</span>
+                                    <span class="count ms-auto">15</span>
+                                </a>
+                            </li>
+                        {% endif %}
+                            
+                    
+                        
+                    {% endfor %}
+                </ul>
+        </div>
+
+        <div class="categories mt-5">
+            <div class="section-heading">
+                <h6 class="title">
+                    Categories
+                </h6>
+            </div>
+
+                <ul class="filter-list">
+                    
+                    {% for category in categories %}
+                    
+                        <li>
+                            <a href="" class="d-flex">
+                                <span class="label">{{ category.title }}</span>
+                                <span class="count ms-auto">{{ categories.count }}</span>
+                            </a>
+                        </li>
+                        
+                    {% endfor %}
+                </ul>
+        </div>
+
+        <div class="tags mt-5">
+            <div class="section-heading">
+                <h6 class="title">
+                    Tags
+                </h6>
+            </div>
+
+                <ul class="filter-list">
+                    
+                    {% for tag in tags %}
+    
+                        <li>
+                            <a href="" class="d-flex">
+                                <span class="label">{{ tag.title }}</span>
+                                <span class="count ms-auto">16</span>
+                            </a>
+                        </li>
+                        
+                    {% endfor %}
+                        
+                </ul>
+        </div>
+    </div>
+
+    <div class="content">
+        
+        {% for post in posts %}
+        
+        <div class="single-item d-flex pb-4">
+            <img src="{% if post.featured_image %} {{ post.featured_image.url }} {% endif %}" alt="" class="post-img">
+            <div class="post-info">
+                <div class="post-category {{post.category.title | lower}} mb-3">
+                    {{post.category.title}}
+                </div>
+                <div class="post-title  mb-3">
+                    <a href="{% url 'admin_post_update' post.slug %}">
+                        <h3 class="title">{{ post.title }}</h3>
+                    </a>
+                </div>
+                <div class="meta">
+                    by <span class="author_name">{{ post.author.name }}</span> <span class="date"> {{ post.created_at }} </span>
+                </div>
+            </div>
+            <div class="views">
+                35,000
+            </div>
+            <select name="visibilty" id="visibilty">
+                <option value="publish">Published</option>
+                <option value="draft">Draft</option>
+            </select>
+        </div>
+
+        {% endfor %}
+            
+
+        {% if is_paginated %}
+            <div class="pagination pt-4 d-flex justify-content-center">
+                <span class="page-links">
+                    {% if page_obj.has_previous %}
+                        <a href="/admin/post/?page={{ page_obj.previous_page_number }}">previous</a>
+                    {% endif %}
+                    <span class="page-current px-4">
+                        Page {{ page_obj.number }} of {{ page_obj.paginator.num_pages }}.
+                    </span>
+                    {% if page_obj.has_next %}
+                        <a href="/admin/post?page={{ page_obj.next_page_number }}">next</a>
+                    {% endif %}
+                </span>
+            </div>
+        {% endif %}
+
+    </div>
+</div>
+{% endblock content %}
+    

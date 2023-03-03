@@ -1,0 +1,9 @@
+{% extends 'dashboard.html' %}
+
+
+{% block content %}
+    {% for request in notifications %}
+        <li><a href="{% url 'admin_notification_details' request.id %}">{{ request.name }}</a></li>
+    {% endfor %}
+{% endblock content %}
+    

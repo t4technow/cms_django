@@ -1,0 +1,18 @@
+{% extends 'dashboard.html' %}
+
+
+{% block content %}
+<a href="{% url 'admin_category_create' %}">Add New Category</a>
+<br>
+    {% for category in categories %}
+    <li>
+        <a href=" {% url 'admin_category_update' category.slug %} ">
+            {{category.title}}
+        </a>
+        <br>
+        <a href=" {% url 'admin_category_delete' category.slug %}">Delete Category</a>
+    </li>
+    
+    {% endfor %}
+{% endblock content %}
+    

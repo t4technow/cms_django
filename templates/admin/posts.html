@@ -1,0 +1,18 @@
+{% extends 'dashboard.html' %}
+
+
+{% block content %}
+<a href="{% url 'admin_post_create' %}">Add New Post</a>
+<br>
+    {% for post in posts %}
+    <li>
+        <a href=" {% url 'admin_post_update' post.slug %} ">
+            {{post.title}}
+        </a>
+        <br>
+        <a href=" {% url 'admin_post_delete' post.slug %}">Delete Post</a>
+    </li>
+    
+    {% endfor %}
+{% endblock content %}
+    

@@ -1,0 +1,35 @@
+{% extends 'base.html' %}
+
+
+{% block content %}
+    <h6> {{ post.category.title }} </h6>
+    <h1>{{ post.title }}</h1>
+    <h6>
+        {{ post.author.name }} 
+        
+        {% if post.author.is_approved %}
+            <input type="button" value="Follow">
+        {% endif %}
+            
+    </h6>
+    <p>{{ post.body }}</p>
+    <ul>
+        
+        {% for tag in post.tags.all %}
+            <li> {{tag.title}} </li>
+        {% endfor %}
+            
+    </ul>
+
+    
+    {% if post.comment %}
+        {% for comment in comments %}
+        1
+        {% endfor %}
+
+    {% endif %}
+        
+
+    {% include 'post/comment.html' %}
+{% endblock content %} 
+    

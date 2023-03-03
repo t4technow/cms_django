@@ -1,0 +1,73 @@
+<div class="col-xl-3 col-lg-8 mx-auto sticky-coloum-item">
+    <div class="rt-sidebar">
+
+
+
+       <div class="sidebar-wrap mb--40">
+          <h2 class="rt-section-heading style-2 mb--30">
+             <span class="rt-section-text">Hot Categories </span>
+             <span class="rt-section-dot"></span>
+             <span class="rt-section-line"></span>
+          </h2>
+          <ul class="rt-categories">
+            
+            {% for category in categories %}
+            <li>
+               <a href="{% url 'single_category' category.slug %}" data-bg-image="media/gallery/cat_1.jpg">
+                  <span class="cat-name">{{ category.title }}</span>
+                  <span class="count">59</span>
+               </a>
+            </li>
+            {% endfor %}
+
+          </ul>
+       </div>
+       <!-- end slidebar wrap  -->
+
+
+       <div class="sidebar-wrap ">
+          <h2 class="rt-section-heading style-2 mb--30">
+             <span class="rt-section-text">Popular News </span>
+             <span class="rt-section-dot"></span>
+             <span class="rt-section-line"></span>
+          </h2>
+          <div class="row rt-gutter-10">
+
+            
+            {% for post in posts %}
+               <div class="col-6">
+                  <div class="rt-post-grid post-grid-md grid-meta popular">
+                     <div class="post-img">
+                        <a href="{% url 'post_details' post.slug %}">
+                           <img src="{{ post.featured_image.url }}" alt="post" width="343"
+                              height="250">
+                        </a>
+                     </div>
+                     <div class="post-content">
+                        <a href="{% url 'single_category' post.category.slug %}" class="rt-post-cat-normal">Fashion</a>
+                        <h4 class="post-title">
+                           <a href="{% url 'post_details' post.slug %}">
+                              {{ post.title }}
+                           </a>
+                        </h4>
+                        <span class="rt-meta">
+                           <i class="far fa-calendar-alt icon"></i>
+                           {{ post.created_at }}
+                        </span>
+                     </div>
+                  </div>
+               </div>
+            {% endfor %}
+               
+             <!-- col-6 -->
+
+          </div>
+          <!-- end row -->
+
+       </div>
+       <!-- end slidebar wrap  -->
+
+    </div>
+    <!-- end rt-sidebar -->
+ </div>
+ <!-- end col -->

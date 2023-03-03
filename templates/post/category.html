@@ -1,0 +1,11 @@
+{% extends 'base.html' %}
+
+
+{% block content %}
+<h1>Category</h1>
+
+{% for post in trending_posts %}
+{{ post.title }}
+{% endfor %}
+
+{% endblock content %}

@@ -1,0 +1,1821 @@
+{% extends 'base.html' %}
+{% load static %}
+
+{% block content %}
+
+
+<!-- start feature-section-style-1  -->
+<section class="rt-feature-section feature-section-style-1 overflow-hidden"
+    data-bg-image="media/elements/element_1.png">
+    <div class="container">
+        <div class="row gutter-24">
+
+
+            {% for post in posts %}
+
+            {% if forloop.counter < 5 %} <div class="col-xl-3 col-md-6 wow fadeInUp" data-wow-delay="200ms"
+                data-wow-duration="800ms">
+                <div class="rt-post post-sm style-1">
+                    <div class="post-img">
+                        <a href=" {% url 'post_details' post.slug %} ">
+                            <img src="{{ post.featured_image.url }}" alt="post" width="100" height="100">
+                        </a>
+                    </div>
+                    <div class="ms-4 post-content">
+                        <a href="{% url 'single_category' post.category.slug %}" class="rt-post-cat-normal">
+                            {{post.category.title }}
+                        </a>
+                        <h3 class="post-title">
+                            <a href="{% url 'post_details' post.slug %}">
+                                {{ post.title }}
+                            </a>
+                        </h3>
+                        <span class="rt-meta">
+                            <i class="far fa-calendar-alt icon"></i>
+                            {{ post.created_at }}
+                        </span>
+                    </div>
+                </div>
+        </div>
+        <!-- end col -->
+        {% endif %}
+
+        {% endfor %}
+
+    </div>
+    <!-- end row -->
+    </div>
+    <!-- end container -->
+</section>
+<!-- end feature-section-style-1  -->
+
+
+<!-- start main post section style 1 -->
+<section class="rt-main-post-section main-post-section-style-1 section-padding">
+    <div class="container">
+        <div class="row gutter-24">
+            
+            {% for post in posts %}
+            
+                {% if forloop.counter == 1 %}
+                                            
+                <div class="col-xl-7 col-lg-6 wow fadeInUp" data-wow-delay="200ms" data-wow-duration="800ms">
+                    <div class="rt-post-overlay rt-post-overlay-xl layout-1">
+                        <div class="post-img">
+                            <a href="{% url 'post_details' post.slug %}" class="img-link">
+                                <img src="{{ post.featured_image.url }}" alt="post-xl_1" width="900" height="600">
+                            </a>
+                        </div>
+                        <div class="post-content">
+                            <a href="{% url 'single_category' post.category.slug %}" class="fashion"> {{ post.category.title }} </a>
+                            <h3 class="post-title bold-underline">
+                                <a href="{% url 'post_details' post.slug %}">
+                                    {{ post.title }}
+                                </a>
+                            </h3>
+                            <div class="post-meta">
+                                <ul>
+                                    <li>
+                                        <span class="rt-meta">
+                                            by <a href="{% url 'author_profile' post.author.id %}" class="name">{{ post.author.name }}</a>
+                                        </span>
+                                    </li>
+                                    <li>
+                                        <span class="rt-meta">
+                                            <i class="far fa-calendar-alt icon"></i>
+                                            {{ post.created_at }}
+                                        </span>
+                                    </li>
+                                    <li>
+                                        <span class="rt-meta">
+                                            <i class="far fa-comments icon"></i>
+                                            <a href="#"> 3,250</a>
+                                        </span>
+                                    </li>
+                                </ul>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+                <!-- end col -->
+                <div class="col-xl-5 col-lg-6">
+                    <div class="row gutter-24">
+
+                        {% else %}
+
+                        <div class="col-12 wow fadeInUp" data-wow-delay="400ms" data-wow-duration="800ms">
+                            <div class="rt-post post-md style-10">
+                                <div class="post-img">
+                                    <a href="{% url 'post_details' post.slug %}">
+                                        <img src="{{ post.featured_image.url }}" alt="post" width="696" height="491">
+                                    </a>
+                                </div>
+                                <div class="post-content">
+                                    <a href="{% url 'single_category' post.slug %}" class="food">{{ post.category.title }}</a>
+                                    <h3 class="post-title">
+                                        <a href="{% url 'post_details' post.slug %}">
+                                            {{ post.title }}
+                                        </a>
+                                    </h3>
+                                    <span class="rt-meta">
+                                        <i class="far fa-calendar-alt icon"></i>
+                                        {{ post.created_at }}
+                                    </span>
+                                </div>
+                            </div>
+                        </div>
+                        <!-- end col -->
+                        
+                {% if forloop.counter == 4 %}
+                    
+                    </div>
+                </div>
+                {% endif %}
+                            
+                {% endif %}
+            {% endfor %}
+
+        </div>
+        <!-- end row -->
+    </div>
+    <!-- end container -->
+</section>
+<!-- end main post section style 1 -->
+
+ <!-- start top stories style 1 -->
+ <section class="top-stories-style-1 section-padding motion-effects-wrap">
+    <ul class="element-list d-none d-xl-block">
+       <li class="motion-effects1"><img class="wow fadeInLeft" data-wow-delay="200ms"
+             data-wow-duration="800ms" src="{% static 'images/elements/element_2.png' %}" alt="element_1" width="88"
+             height="58"></li>
+       <li><img class="wow fadeInDown" data-wow-delay="400ms" data-wow-duration="800ms"
+             src="{% static 'images/elements/element_3.png' %}" alt="element_2" width="182" height="72"></li>
+       <li><img class="wow fadeInRight" data-wow-delay="600ms" data-wow-duration="800ms"
+             src="{% static 'images/elements/element_4.png' %}" alt="element_3" width="199" height="128"></li>
+    </ul>
+    <div class="container">
+       <div class="row">
+          <div class="col-12">
+             <h2 class="rt-section-heading">
+                <span class="rt-section-text">Top Stories </span>
+                <span class="rt-section-dot"></span>
+                <span class="rt-section-line"></span>
+             </h2>
+          </div>
+       </div>
+       <div class="row gutter-24">
+
+        {% for post in posts %}
+            
+        <div class="col-xl-3 col-md-6 wow fadeInUp" data-wow-delay="200ms" data-wow-duration="800ms">
+           <div class="rt-post-grid grid-meta">
+              <div class="post-img">
+                 <a href="{% url 'post_details' post.slug %}">
+                    <img src="{{ post.featured_image.url }}" alt="post" width="551" height="431">
+                 </a>
+              </div>
+              <div class="post-content">
+                 <a href="{% url 'single_category' post.category.slug %}" class="rt-post-cat-normal">{{ post.category.title }}</a>
+                 <h3 class="post-title">
+                    <a href="{% url 'post_details' post.slug %}">
+                       {{ post.title }}
+                    </a>
+                 </h3>
+                 <div class="post-meta">
+                    <ul>
+                       <li>
+                          <span class="rt-meta">
+                             by <a href=" {% url 'author_profile' post.author.id %} " class="name">{{ post.author.name }}</a>
+                          </span>
+                       </li>
+                       <li>
+                          <span class="rt-meta">
+                             <i class="far fa-calendar-alt icon"></i>
+                             {{ post.created_at }}
+                          </span>
+                       </li>
+                    </ul>
+                 </div>
+              </div>
+           </div>
+        </div>
+        <!-- end col -->
+        
+        {% endfor %}
+            
+
+       </div>
+       <!-- end row -->
+    </div>
+    <!-- end container -->
+ </section>
+ <!-- end top stories style 1 -->
+
+ <!-- start what's new section -->
+ <section class="whats-new-style-1 section-padding">
+    <div class="container">
+       <div class="row gutter-30 sticky-coloum-wrap">
+
+          <div class="col-xl-9 sticky-coloum-item">
+             <div class="featured-area-style-1 overflow-hidden">
+
+                <div class="wrap mb--60">
+                   <div class="featured-tab-title">
+                      <h2 class="rt-section-heading">
+                         <span class="rt-section-text">What’s New </span>
+                         <span class="rt-section-dot"></span>
+                         <span class="rt-section-line"></span>
+                      </h2>
+
+                      <ul class="nav rt-tab-menu" id="myTab" role="tablist">
+                         <li class="menu-item" role="presentation">
+                            <a class="menu-link active" id="menu-1-tab" data-bs-toggle="tab" href="#menu-1"
+                               role="tab" aria-controls="menu-1" aria-selected="true"> Django </a>
+                         </li>
+                         <li class="menu-item" role="presentation">
+                            <a class="menu-link" id="menu-2-tab" data-bs-toggle="tab" href="#menu-2"
+                               role="tab" aria-controls="menu-2" aria-selected="false"> React </a>
+                         </li>
+                         <li class="menu-item" role="presentation">
+                            <a class="menu-link" id="menu-3-tab" data-bs-toggle="tab" href="#menu-3"
+                               role="tab" aria-controls="menu-3" aria-selected="false"> Angular </a>
+                         </li>
+                         <li class="menu-item" role="presentation">
+                            <a class="menu-link" id="menu-4-tab" data-bs-toggle="tab" href="#menu-4"
+                               role="tab" aria-controls="menu-4" aria-selected="false"> Flutter </a>
+                         </li>
+                      </ul><!-- end nav tab -->
+                   </div>
+                   <!-- end featured-tab-title -->
+
+                   <div class="tab-content" id="myTabContent">
+                      <div class="tab-pane tab-item animated fadeInUp show active" id="menu-1"
+                         role="tabpanel" aria-labelledby="menu-1-tab">
+                         <div class="row gutter-24">
+                             
+                            {% for post in posts %}
+                            {% if forloop.counter == 1 %}
+
+                            <div class="col-lg-7">            
+                                <div class="rt-post-overlay rt-post-overlay-lg">
+                                    <div class="post-img">
+                                        <a href="{% url 'post_details' post.slug %}" class="img-link">
+                                            <img src="{{ post.featured_image.url }}" alt="post-xl-2" width="900"
+                                            height="600">
+                                        </a>
+                                    </div>
+                                    <div class="post-content">
+                                        <a href="{% url 'single_category' post.category.slug %}" class="world">World</a>
+                                        <h3 class="post-title bold-underline">
+                                            <a href="{% url 'post_details' post.slug %}">
+                                            {{ post.title}}
+                                            </a>
+                                        </h3>
+    
+                                        <div class="post-meta">
+                                            <ul>
+                                            <li>
+                                                <span class="rt-meta">
+                                                    by <a href="{% url 'author_profile' post.author.id %}" class="name">{{ post.author.name }}</a>
+                                                </span>
+                                            </li>
+                                            <li>
+                                                <span class="rt-meta">
+                                                    <i class="far fa-calendar-alt icon"></i>
+                                                    {{ post.created_at }}
+                                                </span>
+                                            </li>
+                                            <li>
+                                                <span class="rt-meta">
+                                                    <i class="far fa-comments icon"></i>
+                                                    <a href="#"> 3,250</a>
+                                                </span>
+                                            </li>
+                                            </ul>
+                                        </div>
+                                    </div>
+                                </div>
+                            </div>
+
+                            <div class="col-lg-5">
+                                <div class="row gutter-24">
+                                    {% else %}
+                                    <div class="col-12">
+                                         <div class="rt-post post-sm style-2">
+                                            <div class="post-content">
+                                               <a href="{% url 'single_category' post.category.slug %}" class="rt-post-cat-normal">{{ post.category.title }}</a>
+                                               <h4 class="post-title">
+                                                  <a href="{% url 'post_details' post.slug %}">
+                                                     {{ post.title }}
+                                                  </a>
+                                               </h4>
+                                               <span class="rt-meta">
+                                                  <i class="far fa-calendar-alt icon"></i>
+                                                  {{ post.created_at }}
+                                               </span>
+                                            </div>
+                                            <div class="post-img">
+                                               <a href="{% url 'post_details' post.slug %}">
+                                                  <img src=" {{ post.featured_image.url }} " alt="post" width="143"
+                                                     height="110">
+                                               </a>
+                                            </div>
+                                         </div>
+                                    </div>
+                                {% endif %}
+                        
+                        {% if forloop.counter == 4 %}
+                            
+                                </div>
+                            </div>
+                        {% endif %}
+                            
+                        {% endfor %}
+
+                         </div>
+                      </div><!-- end ./tab item -->
+
+                      <div class="tab-pane tab-item animated fadeInUp" id="menu-2" role="tabpanel"
+                         aria-labelledby="menu-2-tab">
+                         <div class="row gutter-24">
+                            {% for post in posts %}
+                            {% if forloop.counter == 1 %}
+
+                            <div class="col-lg-7">            
+                                <div class="rt-post-overlay rt-post-overlay-lg">
+                                    <div class="post-img">
+                                        <a href="{% url 'post_details' post.slug %}" class="img-link">
+                                            <img src="{{ post.featured_image.url }}" alt="post-xl-2" width="900"
+                                            height="600">
+                                        </a>
+                                    </div>
+                                    <div class="post-content">
+                                        <a href="{% url 'single_category' post.category.slug %}" class="world">World</a>
+                                        <h3 class="post-title bold-underline">
+                                            <a href="{% url 'post_details' post.slug %}">
+                                            {{ post.title}}
+                                            </a>
+                                        </h3>
+    
+                                        <div class="post-meta">
+                                            <ul>
+                                            <li>
+                                                <span class="rt-meta">
+                                                    by <a href="{% url 'author_profile' post.author.id %}" class="name">{{ post.author.name }}</a>
+                                                </span>
+                                            </li>
+                                            <li>
+                                                <span class="rt-meta">
+                                                    <i class="far fa-calendar-alt icon"></i>
+                                                    {{ post.created_at }}
+                                                </span>
+                                            </li>
+                                            <li>
+                                                <span class="rt-meta">
+                                                    <i class="far fa-comments icon"></i>
+                                                    <a href="#"> 3,250</a>
+                                                </span>
+                                            </li>
+                                            </ul>
+                                        </div>
+                                    </div>
+                                </div>
+                            </div>
+
+                            <div class="col-lg-5">
+                                <div class="row gutter-24">
+                                    {% else %}
+                                    <div class="col-12">
+                                         <div class="rt-post post-sm style-2">
+                                            <div class="post-content">
+                                               <a href="{% url 'single_category' post.category.slug %}" class="rt-post-cat-normal">{{ post.category.title }}</a>
+                                               <h4 class="post-title">
+                                                  <a href="{% url 'post_details' post.slug %}">
+                                                     {{ post.title }}
+                                                  </a>
+                                               </h4>
+                                               <span class="rt-meta">
+                                                  <i class="far fa-calendar-alt icon"></i>
+                                                  {{ post.created_at }}
+                                               </span>
+                                            </div>
+                                            <div class="post-img">
+                                               <a href="{% url 'post_details' post.slug %}">
+                                                  <img src="{{ post.featured_image.url }}" alt="post" width="143"
+                                                     height="110">
+                                               </a>
+                                            </div>
+                                         </div>
+                                    </div>
+                                {% endif %}
+                        
+                        {% if forloop.counter == 4 %}
+                            
+                                </div>
+                            </div>
+                        {% endif %}
+                            
+                        {% endfor %}
+                         </div>
+                      </div><!-- end ./tab item -->
+
+                      <div class="tab-pane tab-item animated fadeInUp" id="menu-3" role="tabpanel"
+                         aria-labelledby="menu-3-tab">
+                         <div class="row gutter-24">
+                            {% for post in posts %}
+                            {% if forloop.counter == 1 %}
+
+                            <div class="col-lg-7">            
+                                <div class="rt-post-overlay rt-post-overlay-lg">
+                                    <div class="post-img">
+                                        <a href="{% url 'post_details' post.slug %}" class="img-link">
+                                            <img src="{{ post.featured_image.url }}" alt="post-xl-2" width="900"
+                                            height="600">
+                                        </a>
+                                    </div>
+                                    <div class="post-content">
+                                        <a href="{% url 'single_category' post.category.slug %}" class="world">World</a>
+                                        <h3 class="post-title bold-underline">
+                                            <a href="{% url 'post_details' post.slug %}">
+                                            {{ post.title}}
+                                            </a>
+                                        </h3>
+    
+                                        <div class="post-meta">
+                                            <ul>
+                                            <li>
+                                                <span class="rt-meta">
+                                                    by <a href="{% url 'author_profile' post.author.id %}" class="name">{{ post.author.name }}</a>
+                                                </span>
+                                            </li>
+                                            <li>
+                                                <span class="rt-meta">
+                                                    <i class="far fa-calendar-alt icon"></i>
+                                                    {{ post.created_at }}
+                                                </span>
+                                            </li>
+                                            <li>
+                                                <span class="rt-meta">
+                                                    <i class="far fa-comments icon"></i>
+                                                    <a href="#"> 3,250</a>
+                                                </span>
+                                            </li>
+                                            </ul>
+                                        </div>
+                                    </div>
+                                </div>
+                            </div>
+
+                            <div class="col-lg-5">
+                                <div class="row gutter-24">
+                                    {% else %}
+                                    <div class="col-12">
+                                         <div class="rt-post post-sm style-2">
+                                            <div class="post-content">
+                                               <a href="{% url 'single_category' post.category.slug %}" class="rt-post-cat-normal">{{ post.category.title }}</a>
+                                               <h4 class="post-title">
+                                                  <a href="{% url 'post_details' post.slug %}">
+                                                     {{post.title}}
+                                                  </a>
+                                               </h4>
+                                               <span class="rt-meta">
+                                                  <i class="far fa-calendar-alt icon"></i>
+                                                  {{ post.created_at }}
+                                               </span>
+                                            </div>
+                                            <div class="post-img">
+                                               <a href="{% url 'post_details' post.slug %}">
+                                                  <img src="media/gallery/post-sm_5.jpg" alt="post" width="143"
+                                                     height="110">
+                                               </a>
+                                            </div>
+                                         </div>
+                                    </div>
+                                {% endif %}
+                        
+                        {% if forloop.counter == 4 %}
+                            
+                                </div>
+                            </div>
+                        {% endif %}
+                            
+                        {% endfor %}
+                         </div>
+                      </div><!-- end ./tab item -->
+
+                      <div class="tab-pane tab-item animated fadeInUp" id="menu-4" role="tabpanel"
+                         aria-labelledby="menu-4-tab">
+                         <div class="row gutter-24">
+                            {% for post in posts %}
+                            {% if forloop.counter == 1 %}
+
+                            <div class="col-lg-7">            
+                                <div class="rt-post-overlay rt-post-overlay-lg">
+                                    <div class="post-img">
+                                        <a href="{% url 'post_details' post.slug %}" class="img-link">
+                                            <img src="{{ post.featured_image.url }}" alt="post-xl-2" width="900"
+                                            height="600">
+                                        </a>
+                                    </div>
+                                    <div class="post-content">
+                                        <a href="{% url 'single_category' post.category.slug %}" class="world">World</a>
+                                        <h3 class="post-title bold-underline">
+                                            <a href="{% url 'post_details' post.slug %}">
+                                            {{ post.title}}
+                                            </a>
+                                        </h3>
+    
+                                        <div class="post-meta">
+                                            <ul>
+                                            <li>
+                                                <span class="rt-meta">
+                                                    by <a href="{% url 'author_profile' post.author.id %}" class="name">{{ post.author.name }}</a>
+                                                </span>
+                                            </li>
+                                            <li>
+                                                <span class="rt-meta">
+                                                    <i class="far fa-calendar-alt icon"></i>
+                                                    {{ post.created_at }}
+                                                </span>
+                                            </li>
+                                            <li>
+                                                <span class="rt-meta">
+                                                    <i class="far fa-comments icon"></i>
+                                                    <a href="#"> 3,250</a>
+                                                </span>
+                                            </li>
+                                            </ul>
+                                        </div>
+                                    </div>
+                                </div>
+                            </div>
+
+                            <div class="col-lg-5">
+                                <div class="row gutter-24">
+                                    {% else %}
+                                    <div class="col-12">
+                                         <div class="rt-post post-sm style-2">
+                                            <div class="post-content">
+                                               <a href="{% url 'single_category' post.category.slug %}" class="rt-post-cat-normal">{{ post.category.title }}</a>
+                                               <h4 class="post-title">
+                                                  <a href="{% url 'post_details' post.slug %}">
+                                                     {{post.title}}
+                                                  </a>
+                                               </h4>
+                                               <span class="rt-meta">
+                                                  <i class="far fa-calendar-alt icon"></i>
+                                                  {{ post.created_at }}
+                                               </span>
+                                            </div>
+                                            <div class="post-img">
+                                               <a href="{% url 'post_details' post.slug %}">
+                                                  <img src="{{post.featured_image.url}}" alt="post" width="143"
+                                                     height="110">
+                                               </a>
+                                            </div>
+                                         </div>
+                                    </div>
+                                {% endif %}
+                        
+                        {% if forloop.counter == 4 %}
+                            
+                                </div>
+                            </div>
+                        {% endif %}
+                            
+                        {% endfor %}
+                         </div>
+                      </div><!-- end ./tab item -->
+                   </div> <!-- end /.tab-content -->
+                </div>
+
+                <div class="wrap">
+                   <h2 class="rt-section-heading">
+                      <span class="rt-section-text">Life Style </span>
+                      <span class="rt-section-dot"></span>
+                      <span class="rt-section-line"></span>
+                   </h2>
+                   <div class="row gutter-10">
+                    
+                    {% for post in posts %}
+                        
+                    <div class="col-lg-6 wow fadeInUp" data-wow-delay="200ms" data-wow-duration="800ms">
+                       <div class="rt-post-overlay rt-post-overlay-md">
+                          <div class="post-img">
+                             <a href="{% url 'post_details' post.slug %}" class="img-link">
+                                <img src="{{ post.featured_image.url }}" alt="post-xl_4" width="900"
+                                   height="600">
+                             </a>
+                          </div>
+                          <div class="post-content">
+                             <h3 class="post-title bold-underline">
+                                <a href="{% url 'post_details' post.slug %}">
+                                   {{ post.title }}
+                                </a>
+                             </h3>
+
+                             <div class="post-meta">
+                                <ul>
+                                   <li>
+                                      <span class="rt-meta">
+                                         by <a href="{% url 'author_profile' post.author.id %}" class="name">{{ post.author.name }}</a>
+                                      </span>
+                                   </li>
+                                   <li>
+                                      <span class="rt-meta">
+                                         <i class="far fa-calendar-alt icon"></i>
+                                         {{ post.created_at }}
+                                      </span>
+                                   </li>
+                                </ul>
+                             </div>
+
+                          </div>
+                       </div>
+                    </div>
+                    <!-- end col -->
+                    {% endfor %}
+                        
+
+                   </div>
+                   <!-- end inner row -->
+                </div>
+
+             </div>
+             <!-- end featured-area-style-1 -->
+          </div>
+          <!-- end col -->
+
+          <!-- sidebar Top -->
+          {% include 'partials/sidebar-top.html' %}
+          <!-- End sidebar Top -->
+          <!-- end col -->
+
+       </div>
+       <!-- end row -->
+    </div>
+    <!--  end container -->
+ </section>
+ <!-- end what's new section -->
+
+ <!-- start video section style 1 -->
+ <section class="video-section-style-1">
+
+    <div class="swiper-container video-slider-style-1">
+       <div class="swiper-wrapper">
+
+            
+            {% for post in posts %}
+            <div class="swiper-slide">
+                <div class="item  video-slide" data-bg-image="{{ post.featured_image.url }}">
+                    <div class="container">
+                    <div class="row justify-content-center">
+                        <div class="col-xl-7 col-lg-8 col-md-10">
+                            <div class="post-content text-center">
+                                <a href="{% url 'single_category' post.category.slug %}" class="rt-post-cat-normal text--white">{{ post.category.title }}</a>
+                                <h2 class="post-title bold-underline">
+                                <a href="{% url 'post_details' post.slug %}">
+                                    {{ post.title }}
+                                </a>
+                                </h2>
+                                <div class="post-meta">
+                                <ul class="justify-content-center">
+                                    <li>
+                                        <span class="rt-meta">
+                                            <i class="far fa-calendar-alt icon"></i>
+                                            {{ post.created_at }}
+                                        </span>
+                                    </li>
+                                    <li>
+                                        <span class="rt-meta">
+                                            <i class="fas fa-user icon"></i>
+                                            Super Star
+                                        </span>
+                                    </li>
+                                    <li>
+                                        <span class="rt-meta">
+                                            <i class="fas fa-share-alt icon"></i>
+                                            3,250
+                                        </span>
+                                    </li>
+                                </ul>
+                                </div>
+                                <div class="btn-wrap mt--30">
+                                <a href="http://www.youtube.com/watch?v=1iIZeIy7TqM"
+                                    class="play-btn play-btn-primary">
+                                    <i class="fas fa-play"></i>
+                                </a>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                    </div>
+                </div>
+            </div>
+            <!-- end swiper-slide -->
+            {% endfor %}
+                
+
+
+       </div>
+    </div>
+    <!-- end video-slider-style-1 -->
+
+    <!-- start video-thumnail-area -->
+    <div class="video-thumnail-area">
+       <div class="container">
+
+          <div class="swiper-container video-slider-thumbnail-style-1">
+             <div class="swiper-wrapper">
+
+                
+                {% for post in posts %}
+
+                    <div class="swiper-slide">
+                    <div class="item video-slide-thumb">
+                        <div class="rt-post post-sm post-thumb">
+                            <div class="post-img">
+                                <img src="{{ post.featured_image.url }}" alt="post" width="130" height="100">
+                            </div>
+                            <div class="ms-3 post-content">
+                                <span class="rt-post-cat-normal">{{ post.category.title }}</span>
+                                <h4 class="post-title">
+                                <span class="title-ex">
+                                    {{post.title}}
+                                </span>
+                                </h4>
+                                <span class="rt-meta">
+                                <i class="far fa-calendar-alt icon"></i>
+                                {{ post.created_at }}
+                                </span>
+                            </div>
+                        </div>
+                    </div>
+                    </div>
+                    <!-- end thumb slide -->
+                {% endfor %}
+                    
+
+
+             </div>
+             <!-- swiper-pagination -->
+             <div class="swiper-pagination"></div>
+          </div>
+          <!-- end video-slider-thumbnail-style-1 -->
+       </div>
+       <!-- end container -->
+    </div>
+    <!-- end video-thumnail-area -->
+
+ </section>
+ <!-- end video section style 1 -->
+
+ <!-- start news and feature  section -->
+ <section class="section-padding">
+    <div class="container">
+
+    <div class="row gutter-24 sticky-coloum-wrap">
+        <div class="col-xl-9 sticky-coloum-item">
+            <div class="featured-area-style-1 sticky-wrap">
+
+                <div class="wrap post-wrap mb--60">
+                    <h2 class="rt-section-heading">
+                        <span class="rt-section-text">Latest News </span>
+                        <span class="rt-section-dot"></span>
+                        <span class="rt-section-line"></span>
+                    </h2>
+
+                    
+                    {% for post in posts %}
+                        
+                        <div class="post-item wow fadeInUp" data-wow-delay="200ms" data-wow-duration="800ms">
+                        <div class="rt-post post-md style-2 grid-meta">
+                            <div class="post-img">
+                                <a href="{% url 'post_details' post.slug %}">
+                                    <img src="{{ post.featured_image.url }}" alt="post" width="696" height="491">
+                                </a>
+                            </div>
+                            <div class="post-content">
+                                <a href="{% url 'single_category' post.category.slug %}" class="animal">{{post.category.title}}</a>
+                                <h3 class="post-title bold-underline">
+                                    <a href="{% url 'post_details' post.slug %}">
+                                    {{ post.title }}
+                                    </a>
+                                </h3>
+                                <p>
+                                    {{ post.title }}
+                                </p>
+                                <div class="post-meta">
+                                    <ul>
+                                    <li>
+                                        <span class="rt-meta">
+                                            by <a href="{% url 'author_profile' post.author.id %}" class="name">{{ post.author.name }}</a>
+                                        </span>
+                                    </li>
+                                    <li>
+                                        <span class="rt-meta">
+                                            <i class="far fa-calendar-alt icon"></i>
+                                            {{ post.created_at }}
+                                        </span>
+                                    </li>
+                                    <li>
+                                        <span class="rt-meta">
+                                            <i class="fas fa-share-alt icon"></i>
+                                            3,250
+                                        </span>
+                                    </li>
+                                    </ul>
+                                </div>
+                                <div class="btn-wrap mt--25">
+                                    <a href="{% url 'post_details' post.slug %}" class="rt-read-more rt-button-animation-out">
+                                    Read More
+                                    <svg width="34px" height="16px" viewBox="0 0 34.53 16"
+                                        xml:space="preserve">
+                                        <rect class="rt-button-line" y="7.6" width="34" height=".4">
+                                        </rect>
+                                        <g class="rt-button-cap-fake">
+                                            <path class="rt-button-cap"
+                                                d="M25.83.7l.7-.7,8,8-.7.71Zm0,14.6,8-8,.71.71-8,8Z"></path>
+                                        </g>
+                                    </svg>
+                                    </a>
+                                </div>
+                            </div>
+                        </div>
+                        </div>
+                        <!-- end post-item -->
+                    {% endfor %}
+                        
+
+                
+
+                </div>
+                <!-- end wrap -->
+
+             </div>
+             <!-- end featured-area-style-1 -->
+          </div>
+          <!-- end col -->
+
+          <!-- sidebar starts -->
+               {% include 'partials/sidebar-bottom.html' %}
+          <!-- sidebar ends -->
+
+       </div>
+
+      <!-- Featured section -->
+      
+      {% comment %}
+         
+      <!-- <div class="row mt--60">
+         <div class="col-12">
+            <div class="wrap">
+               <div class="featured-tab-title">
+                  <h2 class="rt-section-heading">
+                     <span class="rt-section-text">Featured Post </span>
+                     <span class="rt-section-dot"></span>
+                     <span class="rt-section-line"></span>
+                  </h2>
+
+                  <ul class="nav rt-tab-menu" id="myTab-2" role="tablist">
+                     <li class="menu-item" role="presentation">
+                        <a class="menu-link active" id="menu-11-tab" data-bs-toggle="tab" href="#menu-11"
+                           role="tab" aria-controls="menu-11" aria-selected="true"> World </a>
+                     </li>
+                     <li class="menu-item" role="presentation">
+                        <a class="menu-link" id="menu-22-tab" data-bs-toggle="tab" href="#menu-22"
+                           role="tab" aria-controls="menu-22" aria-selected="false"> Travel </a>
+                     </li>
+                     <li class="menu-item" role="presentation">
+                        <a class="menu-link" id="menu-33-tab" data-bs-toggle="tab" href="#menu-33"
+                           role="tab" aria-controls="menu-33" aria-selected="false"> Food </a>
+                     </li>
+                     <li class="menu-item" role="presentation">
+                        <a class="menu-link" id="menu-44-tab" data-bs-toggle="tab" href="#menu-44"
+                           role="tab" aria-controls="menu-44" aria-selected="false"> {{ post.category.title }}</a>
+                     </li>
+                  </ul><!-- end nav tab -->
+               </div>
+               <!-- end featured-tab-title -->
+
+               <div class="tab-content" id="myTabContent-2">
+                  <div class="tab-pane tab-item animated fadeInUp show active" id="menu-11" role="tabpanel"
+                     aria-labelledby="menu-11-tab">
+                     <div class="row gutter-24">
+
+                        <div class="col-xl-4 col-lg-6">
+                           <div class="rt-post-overlay rt-post-overlay-md">
+                              <div class="post-img">
+                                 <a href="{% url 'post_details' post.slug %}" class="img-link">
+                                    <img src="media/gallery/post-xl_3.jpg" alt="post-xl-3" width="900"
+                                       height="600">
+                                 </a>
+                              </div>
+                              <div class="post-content">
+                                 <a href="{% url 'single_category' post.category.slug %}" class="music">Music</a>
+                                 <h3 class="post-title">
+                                    <a href="{% url 'post_details' post.slug %}">
+                                       African ations Are Singing
+                                       To Save Their Wildlife
+                                    </a>
+                                 </h3>
+
+                                 <div class="post-meta">
+                                    <ul>
+                                       <li>
+                                          <span class="rt-meta">
+                                             by <a href="{% url 'author_profile' post.author.id %}" class="name">{{ post.author.name }}</a>
+                                          </span>
+                                       </li>
+                                       <li>
+                                          <span class="rt-meta">
+                                             <i class="far fa-calendar-alt icon"></i>
+                                             {{ post.created_at }}
+                                          </span>
+                                       </li>
+                                    </ul>
+                                 </div>
+
+                              </div>
+                           </div>
+                        </div>
+                        <!-- end col -->
+
+                        <div class="col-xl-4 col-lg-6">
+
+                           <div class="post-grid-md-list gutter-24">
+                              <div class="item">
+                                 <div class="rt-post post-md style-8">
+                                    <div class="post-img">
+                                       <a href="{% url 'post_details' post.slug %}">
+                                          <img src="media/gallery/post-md_4.jpg" alt="post" width="343"
+                                             height="250">
+                                       </a>
+                                    </div>
+                                    <div class="post-content">
+                                       <a href="{% url 'single_category' post.category.slug %}" class="rt-post-cat-normal">{{ post.category.title }}</a>
+                                       <h4 class="post-title">
+                                          <a href="{% url 'post_details' post.slug %}">
+                                             After Moon They Land
+                                             CloseSpace Really?
+                                          </a>
+                                       </h4>
+                                       <span class="rt-meta">
+                                          <i class="far fa-calendar-alt icon"></i>
+                                          {{ post.created_at }}
+                                       </span>
+                                    </div>
+                                 </div>
+                              </div>
+                              <!-- end rt-post post-md item -->
+
+                              <div class="item">
+                                 <div class="rt-post post-md style-8">
+                                    <div class="post-img">
+                                       <a href="{% url 'post_details' post.slug %}">
+                                          <img src="media/gallery/post-grid-md_7.jpg" alt="post" width="343"
+                                             height="250">
+                                       </a>
+                                    </div>
+                                    <div class="post-content">
+                                       <a href="{% url 'single_category' post.category.slug %}" class="rt-post-cat-normal">Travel</a>
+                                       <h4 class="post-title">
+                                          <a href="{% url 'post_details' post.slug %}">
+                                             After Moon They Land
+                                             CloseSpace Really?
+                                          </a>
+                                       </h4>
+                                       <span class="rt-meta">
+                                          <i class="far fa-calendar-alt icon"></i>
+                                          {{ post.created_at }}
+                                       </span>
+                                    </div>
+                                 </div>
+                              </div>
+                              <!-- end rt-post post-md item -->
+
+                              <div class="item">
+                                 <div class="rt-post post-md style-8">
+                                    <div class="post-img">
+                                       <a href="{% url 'post_details' post.slug %}">
+                                          <img src="media/gallery/post-grid-md_8.jpg" alt="post" width="343"
+                                             height="250">
+                                       </a>
+                                    </div>
+                                    <div class="post-content">
+                                       <a href="{% url 'single_category' post.category.slug %}" class="rt-post-cat-normal">Food</a>
+                                       <h4 class="post-title">
+                                          <a href="{% url 'post_details' post.slug %}">
+                                             After Moon They Land
+                                             CloseSpace Really?
+                                          </a>
+                                       </h4>
+                                       <span class="rt-meta">
+                                          <i class="far fa-calendar-alt icon"></i>
+                                          {{ post.created_at }}
+                                       </span>
+                                    </div>
+                                 </div>
+                              </div>
+                              <!-- end rt-post post-md item -->
+
+                           </div>
+                           <!-- end post grid md list -->
+
+                        </div>
+                        <!-- end col -->
+
+                        <div class="col-xl-4 col-lg-6">
+
+                           <div class="post-grid-md-list gutter-24">
+                              <div class="item">
+                                 <div class="rt-post post-md style-8">
+                                    <div class="post-img">
+                                       <a href="{% url 'post_details' post.slug %}">
+                                          <img src="media/gallery/post-grid-md_9.jpg" alt="post" width="343"
+                                             height="250">
+                                       </a>
+                                    </div>
+                                    <div class="post-content">
+                                       <a href="{% url 'single_category' post.category.slug %}" class="rt-post-cat-normal">Travel</a>
+                                       <h4 class="post-title">
+                                          <a href="{% url 'post_details' post.slug %}">
+                                             After Moon They Land
+                                             CloseSpace Really?
+                                          </a>
+                                       </h4>
+                                       <span class="rt-meta">
+                                          <i class="far fa-calendar-alt icon"></i>
+                                          {{ post.created_at }}
+                                       </span>
+                                    </div>
+                                 </div>
+                              </div>
+                              <!-- end rt-post post-md item -->
+
+                              <div class="item">
+                                 <div class="rt-post post-md style-8">
+                                    <div class="post-img">
+                                       <a href="{% url 'post_details' post.slug %}">
+                                          <img src="media/gallery/post-grid-md_10.jpg" alt="post"
+                                             width="343" height="250">
+                                       </a>
+                                    </div>
+                                    <div class="post-content">
+                                       <a href="{% url 'single_category' post.category.slug %}" class="rt-post-cat-normal">{{ post.category.title }}</a>
+                                       <h4 class="post-title">
+                                          <a href="{% url 'post_details' post.slug %}">
+                                             After Moon They Land
+                                             CloseSpace Really?
+                                          </a>
+                                       </h4>
+                                       <span class="rt-meta">
+                                          <i class="far fa-calendar-alt icon"></i>
+                                          {{ post.created_at }}
+                                       </span>
+                                    </div>
+                                 </div>
+                              </div>
+                              <!-- end rt-post post-md item -->
+
+                              <div class="item">
+                                 <div class="rt-post post-md style-8">
+                                    <div class="post-img">
+                                       <a href="{% url 'post_details' post.slug %}">
+                                          <img src="media/gallery/post-grid-md_11.jpg" alt="post"
+                                             width="343" height="250">
+                                       </a>
+                                    </div>
+                                    <div class="post-content">
+                                       <a href="{% url 'single_category' post.category.slug %}" class="rt-post-cat-normal">World</a>
+                                       <h4 class="post-title">
+                                          <a href="{% url 'post_details' post.slug %}">
+                                             After Moon They Land
+                                             CloseSpace Really?
+                                          </a>
+                                       </h4>
+                                       <span class="rt-meta">
+                                          <i class="far fa-calendar-alt icon"></i>
+                                          {{ post.created_at }}
+                                       </span>
+                                    </div>
+                                 </div>
+                              </div>
+                              <!-- end rt-post post-md item -->
+
+                           </div>
+                           <!-- end post grid md list -->
+
+                        </div>
+                        <!-- end col -->
+
+                     </div>
+                     <!-- end innrer row -->
+
+                  </div>
+                  <!-- end ./tab item -->
+
+                  <div class="tab-pane tab-item animated fadeInUp  " id="menu-22" role="tabpanel"
+                     aria-labelledby="menu-22-tab">
+                     <div class="row gutter-24">
+
+                        <div class="col-xl-4 col-lg-6">
+                           <div class="rt-post-overlay rt-post-overlay-md">
+                              <div class="post-img">
+                                 <a href="{% url 'post_details' post.slug %}" class="img-link">
+                                    <img src="media/gallery/post-xl_3.jpg" alt="post-xl-3" width="900"
+                                       height="600">
+                                 </a>
+                              </div>
+                              <div class="post-content">
+                                 <h3 class="post-title">
+                                    <a href="{% url 'post_details' post.slug %}">
+                                       African ations Are Singing
+                                       To Save Their Wildlife
+                                    </a>
+                                 </h3>
+
+                                 <div class="post-meta">
+                                    <ul>
+                                       <li>
+                                          <span class="rt-meta">
+                                             by <a href="{% url 'author_profile' post.author.id %}" class="name">{{ post.author.name }}</a>
+                                          </span>
+                                       </li>
+                                       <li>
+                                          <span class="rt-meta">
+                                             <i class="far fa-calendar-alt icon"></i>
+                                             {{ post.created_at }}
+                                          </span>
+                                       </li>
+                                    </ul>
+                                 </div>
+
+                              </div>
+                           </div>
+                        </div>
+                        <!-- end col -->
+
+                        <div class="col-xl-4 col-lg-6">
+
+                           <div class="post-grid-md-list gutter-24">
+                              <div class="item">
+                                 <div class="rt-post post-md style-8">
+                                    <div class="post-img">
+                                       <a href="{% url 'post_details' post.slug %}">
+                                          <img src="media/gallery/post-md_4.jpg" alt="post" width="343"
+                                             height="250">
+                                       </a>
+                                    </div>
+                                    <div class="post-content">
+                                       <a href="{% url 'single_category' post.category.slug %}" class="rt-post-cat-normal">{{ post.category.title }}</a>
+                                       <h4 class="post-title">
+                                          <a href="{% url 'post_details' post.slug %}">
+                                             After Moon They Land
+                                             CloseSpace Really?
+                                          </a>
+                                       </h4>
+                                       <span class="rt-meta">
+                                          <i class="far fa-calendar-alt icon"></i>
+                                          {{ post.created_at }}
+                                       </span>
+                                    </div>
+                                 </div>
+                              </div>
+                              <!-- end rt-post post-md item -->
+
+                              <div class="item">
+                                 <div class="rt-post post-md style-8">
+                                    <div class="post-img">
+                                       <a href="{% url 'post_details' post.slug %}">
+                                          <img src="media/gallery/post-grid-md_7.jpg" alt="post" width="343"
+                                             height="250">
+                                       </a>
+                                    </div>
+                                    <div class="post-content">
+                                       <a href="{% url 'single_category' post.category.slug %}" class="rt-post-cat-normal">Travel</a>
+                                       <h4 class="post-title">
+                                          <a href="{% url 'post_details' post.slug %}">
+                                             After Moon They Land
+                                             CloseSpace Really?
+                                          </a>
+                                       </h4>
+                                       <span class="rt-meta">
+                                          <i class="far fa-calendar-alt icon"></i>
+                                          {{ post.created_at }}
+                                       </span>
+                                    </div>
+                                 </div>
+                              </div>
+                              <!-- end rt-post post-md item -->
+
+                              <div class="item">
+                                 <div class="rt-post post-md style-8">
+                                    <div class="post-img">
+                                       <a href="{% url 'post_details' post.slug %}">
+                                          <img src="media/gallery/post-grid-md_8.jpg" alt="post" width="343"
+                                             height="250">
+                                       </a>
+                                    </div>
+                                    <div class="post-content">
+                                       <a href="{% url 'single_category' post.category.slug %}" class="rt-post-cat-normal">Food</a>
+                                       <h4 class="post-title">
+                                          <a href="{% url 'post_details' post.slug %}">
+                                             After Moon They Land
+                                             CloseSpace Really?
+                                          </a>
+                                       </h4>
+                                       <span class="rt-meta">
+                                          <i class="far fa-calendar-alt icon"></i>
+                                          {{ post.created_at }}
+                                       </span>
+                                    </div>
+                                 </div>
+                              </div>
+                              <!-- end rt-post post-md item -->
+
+                           </div>
+                           <!-- end post grid md list -->
+
+                        </div>
+                        <!-- end col -->
+
+                        <div class="col-xl-4 col-lg-6">
+
+                           <div class="post-grid-md-list gutter-24">
+                              <div class="item">
+                                 <div class="rt-post post-md style-8">
+                                    <div class="post-img">
+                                       <a href="{% url 'post_details' post.slug %}">
+                                          <img src="media/gallery/post-grid-md_9.jpg" alt="post" width="343"
+                                             height="250">
+                                       </a>
+                                    </div>
+                                    <div class="post-content">
+                                       <a href="{% url 'single_category' post.category.slug %}" class="rt-post-cat-normal">Travel</a>
+                                       <h4 class="post-title">
+                                          <a href="{% url 'post_details' post.slug %}">
+                                             After Moon They Land
+                                             CloseSpace Really?
+                                          </a>
+                                       </h4>
+                                       <span class="rt-meta">
+                                          <i class="far fa-calendar-alt icon"></i>
+                                          {{ post.created_at }}
+                                       </span>
+                                    </div>
+                                 </div>
+                              </div>
+                              <!-- end rt-post post-md item -->
+
+                              <div class="item">
+                                 <div class="rt-post post-md style-8">
+                                    <div class="post-img">
+                                       <a href="{% url 'post_details' post.slug %}">
+                                          <img src="media/gallery/post-grid-md_10.jpg" alt="post"
+                                             width="343" height="250">
+                                       </a>
+                                    </div>
+                                    <div class="post-content">
+                                       <a href="{% url 'single_category' post.category.slug %}" class="rt-post-cat-normal">{{ post.category.title }}</a>
+                                       <h4 class="post-title">
+                                          <a href="{% url 'post_details' post.slug %}">
+                                             After Moon They Land
+                                             CloseSpace Really?
+                                          </a>
+                                       </h4>
+                                       <span class="rt-meta">
+                                          <i class="far fa-calendar-alt icon"></i>
+                                          {{ post.created_at }}
+                                       </span>
+                                    </div>
+                                 </div>
+                              </div>
+                              <!-- end rt-post post-md item -->
+
+                              <div class="item">
+                                 <div class="rt-post post-md style-8">
+                                    <div class="post-img">
+                                       <a href="{% url 'post_details' post.slug %}">
+                                          <img src="media/gallery/post-grid-md_11.jpg" alt="post"
+                                             width="343" height="250">
+                                       </a>
+                                    </div>
+                                    <div class="post-content">
+                                       <a href="{% url 'single_category' post.category.slug %}" class="rt-post-cat-normal">World</a>
+                                       <h4 class="post-title">
+                                          <a href="{% url 'post_details' post.slug %}">
+                                             After Moon They Land
+                                             CloseSpace Really?
+                                          </a>
+                                       </h4>
+                                       <span class="rt-meta">
+                                          <i class="far fa-calendar-alt icon"></i>
+                                          {{ post.created_at }}
+                                       </span>
+                                    </div>
+                                 </div>
+                              </div>
+                              <!-- end rt-post post-md item -->
+
+                           </div>
+                           <!-- end post grid md list -->
+
+                        </div>
+                        <!-- end col -->
+
+                     </div>
+                     <!-- end innrer row -->
+                  </div>
+                  <!-- end ./tab item -->
+
+                  <div class="tab-pane tab-item animated fadeInUp  " id="menu-33" role="tabpanel"
+                     aria-labelledby="menu-33-tab">
+                     <div class="row gutter-24">
+
+                        <div class="col-xl-4 col-lg-6">
+                           <div class="rt-post-overlay rt-post-overlay-md">
+                              <div class="post-img">
+                                 <a href="{% url 'post_details' post.slug %}" class="img-link">
+                                    <img src="media/gallery/post-xl_3.jpg" alt="post-xl-3" width="900"
+                                       height="600">
+                                 </a>
+                              </div>
+                              <div class="post-content">
+                                 <a href="{% url 'single_category' post.category.slug %}" class="music">Music</a>
+                                 <h3 class="post-title">
+                                    <a href="{% url 'post_details' post.slug %}">
+                                       African ations Are Singing
+                                       To Save Their Wildlife
+                                    </a>
+                                 </h3>
+
+                                 <div class="post-meta">
+                                    <ul>
+                                       <li>
+                                          <span class="rt-meta">
+                                             by <a href="{% url 'author_profile' post.author.id %}" class="name">{{ post.author.name }}</a>
+                                          </span>
+                                       </li>
+                                       <li>
+                                          <span class="rt-meta">
+                                             <i class="far fa-calendar-alt icon"></i>
+                                             {{ post.created_at }}
+                                          </span>
+                                       </li>
+                                    </ul>
+                                 </div>
+
+                              </div>
+                           </div>
+                        </div>
+                        <!-- end col -->
+
+                        <div class="col-xl-4 col-lg-6">
+
+                           <div class="post-grid-md-list gutter-24">
+                              <div class="item">
+                                 <div class="rt-post post-md style-8">
+                                    <div class="post-img">
+                                       <a href="{% url 'post_details' post.slug %}">
+                                          <img src="media/gallery/post-md_4.jpg" alt="post" width="343"
+                                             height="250">
+                                       </a>
+                                    </div>
+                                    <div class="post-content">
+
+                                       <a href="{% url 'single_category' post.category.slug %}" class="rt-post-cat-normal">{{ post.category.title }}</a>
+                                       <h4 class="post-title">
+                                          <a href="{% url 'post_details' post.slug %}">
+                                             After Moon They Land
+                                             CloseSpace Really?
+                                          </a>
+                                       </h4>
+                                       <span class="rt-meta">
+                                          <i class="far fa-calendar-alt icon"></i>
+                                          {{ post.created_at }}
+                                       </span>
+                                    </div>
+                                 </div>
+                              </div>
+                              <!-- end rt-post post-md item -->
+
+                              <div class="item">
+                                 <div class="rt-post post-md style-8">
+                                    <div class="post-img">
+                                       <a href="{% url 'post_details' post.slug %}">
+                                          <img src="media/gallery/post-grid-md_7.jpg" alt="post" width="343"
+                                             height="250">
+                                       </a>
+                                    </div>
+                                    <div class="post-content">
+                                       <a href="{% url 'single_category' post.category.slug %}" class="rt-post-cat-normal">Travel</a>
+                                       <h4 class="post-title">
+                                          <a href="{% url 'post_details' post.slug %}">
+                                             After Moon They Land
+                                             CloseSpace Really?
+                                          </a>
+                                       </h4>
+                                       <span class="rt-meta">
+                                          <i class="far fa-calendar-alt icon"></i>
+                                          {{ post.created_at }}
+                                       </span>
+                                    </div>
+                                 </div>
+                              </div>
+                              <!-- end rt-post post-md item -->
+
+                              <div class="item">
+                                 <div class="rt-post post-md style-8">
+                                    <div class="post-img">
+                                       <a href="{% url 'post_details' post.slug %}">
+                                          <img src="media/gallery/post-grid-md_8.jpg" alt="post" width="343"
+                                             height="250">
+                                       </a>
+                                    </div>
+                                    <div class="post-content">
+                                       <a href="{% url 'single_category' post.category.slug %}" class="rt-post-cat-normal">Food</a>
+                                       <h4 class="post-title">
+                                          <a href="{% url 'post_details' post.slug %}">
+                                             After Moon They Land
+                                             CloseSpace Really?
+                                          </a>
+                                       </h4>
+                                       <span class="rt-meta">
+                                          <i class="far fa-calendar-alt icon"></i>
+                                          {{ post.created_at }}
+                                       </span>
+                                    </div>
+                                 </div>
+                              </div>
+                              <!-- end rt-post post-md item -->
+
+                           </div>
+                           <!-- end post grid md list -->
+
+                        </div>
+                        <!-- end col -->
+
+                        <div class="col-xl-4 col-lg-6">
+
+                           <div class="post-grid-md-list gutter-24">
+                              <div class="item">
+                                 <div class="rt-post post-md style-8">
+                                    <div class="post-img">
+                                       <a href="{% url 'post_details' post.slug %}">
+                                          <img src="media/gallery/post-grid-md_9.jpg" alt="post" width="343"
+                                             height="250">
+                                       </a>
+                                    </div>
+                                    <div class="post-content">
+                                       <a href="{% url 'single_category' post.category.slug %}" class="rt-post-cat-normal">Travel</a>
+                                       <h4 class="post-title">
+                                          <a href="{% url 'post_details' post.slug %}">
+                                             After Moon They Land
+                                             CloseSpace Really?
+                                          </a>
+                                       </h4>
+                                       <span class="rt-meta">
+                                          <i class="far fa-calendar-alt icon"></i>
+                                          {{ post.created_at }}
+                                       </span>
+                                    </div>
+                                 </div>
+                              </div>
+                              <!-- end rt-post post-md item -->
+
+                              <div class="item">
+                                 <div class="rt-post post-md style-8">
+                                    <div class="post-img">
+                                       <a href="{% url 'post_details' post.slug %}">
+                                          <img src="media/gallery/post-grid-md_10.jpg" alt="post"
+                                             width="343" height="250">
+                                       </a>
+                                    </div>
+                                    <div class="post-content">
+                                       <a href="{% url 'single_category' post.category.slug %}" class="rt-post-cat-normal">{{ post.category.title }}</a>
+                                       <h4 class="post-title">
+                                          <a href="{% url 'post_details' post.slug %}">
+                                             After Moon They Land
+                                             CloseSpace Really?
+                                          </a>
+                                       </h4>
+                                       <span class="rt-meta">
+                                          <i class="far fa-calendar-alt icon"></i>
+                                          {{ post.created_at }}
+                                       </span>
+                                    </div>
+                                 </div>
+                              </div>
+                              <!-- end rt-post post-md item -->
+
+                              <div class="item">
+                                 <div class="rt-post post-md style-8">
+                                    <div class="post-img">
+                                       <a href="{% url 'post_details' post.slug %}">
+                                          <img src="media/gallery/post-grid-md_11.jpg" alt="post"
+                                             width="343" height="250">
+                                       </a>
+                                    </div>
+                                    <div class="post-content">
+                                       <a href="{% url 'single_category' post.category.slug %}" class="rt-post-cat-normal">World</a>
+                                       <h4 class="post-title">
+                                          <a href="{% url 'post_details' post.slug %}">
+                                             After Moon They Land
+                                             CloseSpace Really?
+                                          </a>
+                                       </h4>
+                                       <span class="rt-meta">
+                                          <i class="far fa-calendar-alt icon"></i>
+                                          {{ post.created_at }}
+                                       </span>
+                                    </div>
+                                 </div>
+                              </div>
+                              <!-- end rt-post post-md item -->
+
+                           </div>
+                           <!-- end post grid md list -->
+
+                        </div>
+                        <!-- end col -->
+
+                     </div>
+                     <!-- end innrer row -->
+                  </div>
+                  <!-- end ./tab item -->
+
+                  <div class="tab-pane tab-item animated fadeInUp  " id="menu-44" role="tabpanel"
+                     aria-labelledby="menu-44-tab">
+                     <div class="row gutter-24">
+
+                        <div class="col-xl-4 col-lg-6">
+                           <div class="rt-post-overlay rt-post-overlay-md">
+                              <div class="post-img">
+                                 <a href="{% url 'post_details' post.slug %}" class="img-link">
+                                    <img src="media/gallery/post-xl_3.jpg" alt="post-xl-3" width="900"
+                                       height="600">
+                                 </a>
+                              </div>
+                              <div class="post-content">
+                                 <a href="{% url 'single_category' post.category.slug %}" class="music">Music</a>
+                                 <h3 class="post-title">
+                                    <a href="{% url 'post_details' post.slug %}">
+                                       African ations Are Singing
+                                       To Save Their Wildlife
+                                    </a>
+                                 </h3>
+
+                                 <div class="post-meta">
+                                    <ul>
+                                       <li>
+                                          <span class="rt-meta">
+                                             by <a href="{% url 'author_profile' post.author.id %}" class="name">{{ post.author.name }}</a>
+                                          </span>
+                                       </li>
+                                       <li>
+                                          <span class="rt-meta">
+                                             <i class="far fa-calendar-alt icon"></i>
+                                             {{ post.created_at }}
+                                          </span>
+                                       </li>
+                                    </ul>
+                                 </div>
+
+                              </div>
+                           </div>
+                        </div>
+                        <!-- end col -->
+
+                        <div class="col-xl-4 col-lg-6">
+
+                           <div class="post-grid-md-list gutter-24">
+                              <div class="item">
+                                 <div class="rt-post post-md style-8">
+                                    <div class="post-img">
+                                       <a href="{% url 'post_details' post.slug %}">
+                                          <img src="media/gallery/post-md_4.jpg" alt="post" width="343"
+                                             height="250">
+                                       </a>
+                                    </div>
+                                    <div class="post-content">
+                                       <a href="{% url 'single_category' post.category.slug %}" class="rt-post-cat-normal">{{ post.category.title }}</a>
+                                       <h4 class="post-title">
+                                          <a href="{% url 'post_details' post.slug %}">
+                                             After Moon They Land
+                                             CloseSpace Really?
+                                          </a>
+                                       </h4>
+                                       <span class="rt-meta">
+                                          <i class="far fa-calendar-alt icon"></i>
+                                          {{ post.created_at }}
+                                       </span>
+                                    </div>
+                                 </div>
+                              </div>
+                              <!-- end rt-post post-md item -->
+
+                              <div class="item">
+                                 <div class="rt-post post-md style-8">
+                                    <div class="post-img">
+                                       <a href="{% url 'post_details' post.slug %}">
+                                          <img src="media/gallery/post-grid-md_7.jpg" alt="post" width="343"
+                                             height="250">
+                                       </a>
+                                    </div>
+                                    <div class="post-content">
+                                       <a href="{% url 'single_category' post.category.slug %}" class="rt-post-cat-normal">Travel</a>
+                                       <h4 class="post-title">
+                                          <a href="{% url 'post_details' post.slug %}">
+                                             After Moon They Land
+                                             CloseSpace Really?
+                                          </a>
+                                       </h4>
+                                       <span class="rt-meta">
+                                          <i class="far fa-calendar-alt icon"></i>
+                                          {{ post.created_at }}
+                                       </span>
+                                    </div>
+                                 </div>
+                              </div>
+                              <!-- end rt-post post-md item -->
+
+                              <div class="item">
+                                 <div class="rt-post post-md style-8">
+                                    <div class="post-img">
+                                       <a href="{% url 'post_details' post.slug %}">
+                                          <img src="media/gallery/post-grid-md_8.jpg" alt="post" width="343"
+                                             height="250">
+                                       </a>
+                                    </div>
+                                    <div class="post-content">
+                                       <a href="{% url 'single_category' post.category.slug %}" class="rt-post-cat-normal">Food</a>
+                                       <h4 class="post-title">
+                                          <a href="{% url 'post_details' post.slug %}">
+                                             After Moon They Land
+                                             CloseSpace Really?
+                                          </a>
+                                       </h4>
+                                       <span class="rt-meta">
+                                          <i class="far fa-calendar-alt icon"></i>
+                                          {{ post.created_at }}
+                                       </span>
+                                    </div>
+                                 </div>
+                              </div>
+                              <!-- end rt-post post-md item -->
+
+                           </div>
+                           <!-- end post grid md list -->
+
+                        </div>
+                        <!-- end col -->
+
+                        <div class="col-xl-4 col-lg-6">
+
+                           <div class="post-grid-md-list gutter-24">
+                              <div class="item">
+                                 <div class="rt-post post-md style-8">
+                                    <div class="post-img">
+                                       <a href="{% url 'post_details' post.slug %}">
+                                          <img src="media/gallery/post-grid-md_9.jpg" alt="post" width="343"
+                                             height="250">
+                                       </a>
+                                    </div>
+                                    <div class="post-content">
+                                       <a href="{% url 'single_category' post.category.slug %}" class="rt-post-cat-normal">Travel</a>
+                                       <h4 class="post-title">
+                                          <a href="{% url 'post_details' post.slug %}">
+                                             After Moon They Land
+                                             CloseSpace Really?
+                                          </a>
+                                       </h4>
+                                       <span class="rt-meta">
+                                          <i class="far fa-calendar-alt icon"></i>
+                                          {{ post.created_at }}
+                                       </span>
+                                    </div>
+                                 </div>
+                              </div>
+                              <!-- end rt-post post-md item -->
+
+                              <div class="item">
+                                 <div class="rt-post post-md style-8">
+                                    <div class="post-img">
+                                       <a href="{% url 'post_details' post.slug %}">
+                                          <img src="media/gallery/post-grid-md_10.jpg" alt="post"
+                                             width="343" height="250">
+                                       </a>
+                                    </div>
+                                    <div class="post-content">
+                                       <a href="{% url 'single_category' post.category.slug %}" class="rt-post-cat-normal">{{ post.category.title }}</a>
+                                       <h4 class="post-title">
+                                          <a href="{% url 'post_details' post.slug %}">
+                                             After Moon They Land
+                                             CloseSpace Really?
+                                          </a>
+                                       </h4>
+                                       <span class="rt-meta">
+                                          <i class="far fa-calendar-alt icon"></i>
+                                          {{ post.created_at }}
+                                       </span>
+                                    </div>
+                                 </div>
+                              </div>
+                              <!-- end rt-post post-md item -->
+
+                              <div class="item">
+                                 <div class="rt-post post-md style-8">
+                                    <div class="post-img">
+                                       <a href="{% url 'post_details' post.slug %}">
+                                          <img src="media/gallery/post-grid-md_11.jpg" alt="post"
+                                             width="343" height="250">
+                                       </a>
+                                    </div>
+                                    <div class="post-content">
+                                       <a href="{% url 'single_category' post.category.slug %}" class="rt-post-cat-normal">World</a>
+                                       <h4 class="post-title">
+                                          <a href="{% url 'post_details' post.slug %}">
+                                             After Moon They Land
+                                             CloseSpace Really?
+                                          </a>
+                                       </h4>
+                                       <span class="rt-meta">
+                                          <i class="far fa-calendar-alt icon"></i>
+                                          {{ post.created_at }}
+                                       </span>
+                                    </div>
+                                 </div>
+                              </div>
+                              <!-- end rt-post post-md item -->
+
+                           </div>
+                           <!-- end post grid md list -->
+
+                        </div>
+                        <!-- end col -->
+
+                     </div>
+                     <!-- end innrer row -->
+                  </div>
+                  <!-- end ./tab item -->
+
+               </div>
+               <!-- end /.tab-content -->
+
+            </div>
+            <!-- end  wrap  -->
+         </div>
+         <!-- end col  -->
+      </div> -->
+      {% endcomment %}
+         
+      <!-- End Featured Section -->
+       <!-- end row -->
+
+    </div>
+    <!-- end container -->
+ </section>
+ <!-- end news and feature section -->
+
+ <!-- start subscribe section -->
+ <div class="section subscribe-section-style-1">
+    <div class="container">
+       <div class="row  justify-content-evenly">
+
+          <div class="col-lg-4 align-self-end wow fadeInLeft d-none d-lg-block" data-wow-delay="300ms"
+             data-wow-duration="800ms">
+             <div class="subscribe-img bouncing-bubble-animation">
+                <img src="{% static 'images/gallery/subscrible-img_1.png' %}" alt="subscrible" width="401" height="327">
+             </div>
+          </div>
+          <!-- end col -->
+
+          <div class="col-lg-6 align-self-center wow fadeInRight" data-wow-delay="600ms"
+             data-wow-duration="800ms">
+             <div class="rt-subscribe-box">
+                <h3 class="title">
+                   Get The Best Blog Stories
+                   into Your inbox!
+                </h3>
+                <form action="#" class="rt-contact-form subscribe-form-style-2">
+                   <div class="rt-subs-group">
+                      <input type="email" name="email" id="email_2" class="subscribe-form"
+                         placeholder="Your e-mail" data-error="Email field is required" required>
+                      <button type="submit" class="subscribe-btn">Subscribe </button>
+                      <div class="form-response"></div>
+                   </div>
+                </form>
+             </div>
+          </div>
+          <!-- end col -->
+
+       </div>
+       <!-- end row -->
+    </div>
+    <!-- end container -->
+ </div>
+ <!-- end subscribe section -->
+
+
+{% endblock content %}

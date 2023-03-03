@@ -1,0 +1,30 @@
+{% extends 'dashboard.html' %}
+
+
+{% block content %}
+
+<li>
+    <a href=" {% url 'update_user' request.user.id %} ">
+        {{request.user.first_name}}
+    </a>
+</li>
+
+<li>
+    <a href=" {% url 'update_user' request.user.id %} ">
+        {{request.user.last_name}}
+    </a>
+</li>
+
+<li>
+    <a href=" {% url 'update_user' request.user.id %} ">
+        {{request.user.username}}
+    </a>
+</li>
+
+<li>
+    <a href=" {% url 'update_user' request.user.id %} ">
+        {{request.user.email}}
+    </a>
+</li>
+
+{% endblock content %}

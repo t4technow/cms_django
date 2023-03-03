@@ -1,0 +1,18 @@
+{% extends 'dashboard.html' %}
+
+
+{% block content %}
+<a href="{% url 'admin_page_create' %}">Add New Page</a>
+<br>
+    {% for page in pages %}
+    <li>
+        <a href=" {% url 'admin_page_update' page.slug %} ">
+            {{page.title}}
+        </a>
+        <br>
+        <a href=" {% url 'admin_page_delete' page.slug %}">Delete Page</a>
+    </li>
+    
+    {% endfor %}
+{% endblock content %}
+    

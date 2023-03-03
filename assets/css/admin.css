@@ -1,0 +1,16 @@
+:root {
+    --dark : #000;
+    --light : #fff;
+}
+
+* {
+    margin: 0;
+    padding: 0;
+    box-sizing: border-box;
+}
+
+.bg-dark {
+    background-color: var(--dark);
+    color: var(--light);
+}
+

@@ -1,0 +1,85 @@
+{% extends 'base.html' %}
+
+{% load static %}
+
+
+{% block content %}
+<div class="row justify-content-center py-3">
+    
+    <div class="col-6 my-5 px-5">
+        <div class="subscribe-box-style-1 p-5 py-5" data-bg-image="media/elements/element_5.png">
+            <div class="subscribe-content login-form">
+               <h3 class="title pb-3">
+                  Sign up to enjoy a tailored Experience
+               </h3>
+               <form method="post" class="rt-contact-form subscribe-form rt-form pt-5 px-3">
+                {% csrf_token %}
+                
+                <div class="row col-12 m-0">
+
+                    <div class="col-6 ps-0">
+                        <div class="rt-form-group mb-4">
+                            {{ form.first_name }}
+                        </div>
+                    </div>
+    
+                    <div class="col-6 pe-0">
+                        <div class="rt-form-group mb-4">
+                            {{ form.last_name }}
+                        </div>
+                    </div>
+                </div>
+
+                                
+                <div class="rt-form-group mb-4">
+                    {{ form.username }}
+                  </div>
+                  <div class="rt-form-group mb-4">
+                    {{ form.email }}
+                 </div>
+
+                 <div class="row col-12 m-0">
+
+                    <div class="col-6 ps-0">
+                        <div class="rt-form-group mb-4">
+                            {{ form.password1 }}
+                        </div>
+                    </div>
+    
+                    <div class="col-6 pe-0">
+                        <div class="rt-form-group mb-4">
+                            {{ form.password2 }}
+                        </div>
+                    </div>
+                </div>
+
+                <button type="submit" class="rt-submit-btn mt-3">Sign Up</button>
+                <div class="form-response">
+                    
+                    
+                    {% if form.errors %}
+
+                        <div class="small-text text-danger">
+                            {{ form.username.errors }}
+                        </div>
+                        <div class="small-text text-danger">
+                            {{ form.password1.errors }}
+                        </div>
+                        <div class="small-text text-danger">
+                            {{ form.password2.errors }}
+                        </div>
+                        
+                    {% endif %}
+                        
+                </div>
+                  <div class="small-text pt-3">
+                  Already have an account? <a href="">Sign In</a>
+                  </div>
+               </form>
+            </div>
+        </div>
+    </div>
+</div>
+
+{% endblock content %}
+    
