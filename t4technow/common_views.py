@@ -105,12 +105,17 @@ class PageDeleteView(DeleteView):
 
 
 # Category Management
-class CategoryListView(ListView):
-    model = Category
-    context_object_name = 'categories'
-    template_name = "admin/category.html"
-    extra_context = {'sidebar': True}
+# class CategoryListView(ListView):
+#     model = Category
+#     context_object_name = 'categories'
+#     template_name = "admin/category/home.html"
+#     extra_context = {'sidebar': True}
     
+
+class CategoryListView(TemplateView):
+    template_name = "admin/category/categories.html"
+    extra_context = {'sidebar': True}
+
 
 
 class CategoryCreateView(CreateView):
@@ -142,12 +147,17 @@ class CategoryDeleteView(DeleteView):
 
 
 # Tag Management
-class TagListView(ListView):
-    model = Tag
-    context_object_name = 'tags'
-    template_name = "admin/tags.html"
-    extra_context = {'sidebar': True}
+# class TagListView(ListView):
+#     model = Tag
+#     context_object_name = 'tags'
+#     template_name = "admin/tags.html"
+#     extra_context = {'sidebar': True}
     
+    
+class TagListView(TemplateView):
+    template_name = "admin/tags/tags.html"
+    extra_context = {'sidebar': True}
+
 
 
 class TagCreateView(CreateView):
@@ -179,8 +189,11 @@ class TagDeleteView(DeleteView):
 
 # Profile management
 class Profile(TemplateView):
-    template_name = "admin/profile.html"
-    extra_context = {'sidebar': True}
+    template_name = "admin/author/profile.html"
+    extra_context = {
+        'sidebar': True,
+        'title': 'profile'
+        }
     
 
 
@@ -196,9 +209,16 @@ class ProfileUpdateView(UpdateView):
 class NotificationListView(ListView):
     model = Author
     context_object_name = 'notifications'
+    
+    opened = Author.objects.filter(request_status = True)
+    declined = Author.objects.filter(request_status = True, is_approved = False)
 
-    template_name = "admin/notifications.html"
-    extra_context = {'sidebar': True}
+    template_name = "admin/notifications/home.html"
+    extra_context = {
+        'sidebar': True,
+        'opened': opened,
+        'declined': declined,
+        }
     
     
     def get_queryset(self):

@@ -6,4 +6,16 @@
 
 {{ category.title }}
 
+
+{% for post in posts %}
+    <li>{{post.title}}
+        <ul>
+            <li>{{ post.category }}</li>
+        </ul>
+    </li>
+
+{% endfor %}
+    
+
+
 {% endblock content %}

@@ -64,11 +64,41 @@ class PostUpdateView(PermissionRequiredMixin, PostUpdateView):
         return redirect('admin_login')
 
 
+
+# Page Management
+class PageListView(PermissionRequiredMixin, PageListView):
+    permission_required = 'User.is_superuser'
+    template_name = "admin/page/pages.html"
+        
+    def handle_no_permission(self):
+        return redirect('admin_login')
+    
+
+class PageCreateView(CreateView):
+    model = Post
+    fields = ['title', 'body', 'excerpt', 'author', 'visibility',]
+    template_name = "admin/add.html"
+    success_url = reverse_lazy('admin')
+
+    def form_valid(self, form):
+        
+        title = form.cleaned_data['title']
+        slug = slugify(title)
+        form.instance.slug = slug
+        
+        form.instance.content_type = 'page'
+
+        form.instance.allow_comments = 'no comments'
+        
+        return super().form_valid(form)
+
+
 # Author Management
 class AuthorListView(ListView):
     model = Author
     context_object_name = 'authors'
-    template_name = "admin/authors.html"
+    template_name = "admin/author/home.html"
+    extra_context = {'sidebar': True}
     
     def get_queryset(self):
         queryset = Author.objects.filter(is_approved = True)

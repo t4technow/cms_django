@@ -1,0 +1,78 @@
+{% extends 'dashboard.html' %}
+
+
+{% block content %}
+
+<!-- Tabs navs -->
+
+<ul class="nav nav-tabs nav-justified" id="myTab" role="tablist">
+    <li class="nav-item" role="presentation">
+        <button class="nav-link active" id="unread-tab" data-bs-toggle="tab" data-bs-target="#unread" type="button" role="tab" aria-controls="unread" aria-selected="true">New Request</button>
+    </li>
+    <li class="nav-item" role="presentation">
+        <button class="nav-link" id="read-tab" data-bs-toggle="tab" data-bs-target="#read" type="button" role="tab" aria-controls="read" aria-selected="false">Pending Requests</button>
+    </li>
+    <li class="nav-item" role="presentation">
+        <button class="nav-link" id="declined-tab" data-bs-toggle="tab" data-bs-target="#declined" type="button" role="tab" aria-controls="declined" aria-selected="false">Declined Requests</button>
+    </li>
+</ul>
+
+
+<!-- Tabs navs -->
+
+<!-- Tabs content -->
+    <div class="tab-content" id="myTabContent">
+        <div class="tab-pane fade show active" id="unread" role="tabpanel" aria-labelledby="unread-tab">
+            
+            {% for request in notifications %}
+                <li class="d-flex my-1 p-4">
+                    <a href="" class="me-5">
+                        <div class="user_image">
+                            <img src="{{ request.user_id.profile_pic.url }}" alt="">
+                        </div>
+                    </a>
+
+                    <a href="{% url 'admin_notification_details' request.id %}" class="w-100">
+                        <span class="username">{{ request.name }}</span> would like to become an author
+                    </a>
+                </li>
+            {% endfor %}
+        
+        </div>
+        <div class="tab-pane fade" id="read" role="tabpanel" aria-labelledby="read-tab">
+
+            {% for request in opened %}
+                <li class="d-flex p-4 my-1">
+                    <a href="" class="me-5">
+                        <div class="user_image">
+                            <img src="{{ request.user_id.profile_pic.url }}" alt="">
+                        </div>
+                    </a>
+
+                    <a href="{% url 'admin_notification_details' request.id %}" class="w-100">
+                        <span class="username">{{ request.name }}</span> would like to become an author
+                    </a>
+                </li>
+            {% endfor %}
+
+        </div>
+        <div class="tab-pane fade" id="declined" role="tabpanel" aria-labelledby="declined-tab">
+            {% for request in declined %}
+                <li class="d-flex  p-4 my-1">
+                    <a href="" class="me-5">
+                        <div class="user_image">
+                            <img src="{{ request.user_id.profile_pic.url }}" alt="">
+                        </div>
+                    </a>
+
+                    <a href="{% url 'admin_notification_details' request.id %}" class="w-100">
+                        <span class="username">{{ request.name }}</span> would like to become an author
+                    </a>
+                </li>
+            {% endfor %}
+        </div>
+    </div>
+<!-- Tabs content -->
+
+
+{% endblock content %}

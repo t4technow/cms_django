@@ -21,11 +21,11 @@ from django.conf.urls.static import static
 
 urlpatterns = [
     path('', include('post.urls')),
-    # path('admin/', admin.site.urls),
     path('admin/', include('admin.urls')),
     path('author/', include('author.urls')),
     path('user/', include('user.urls')),
-    path('tinymce/',include('tinymce.urls'))
+    path('tinymce/',include('tinymce.urls')),
+    path('verification/', include('verify_email.urls')),
 ]
 
 urlpatterns += static(settings.MEDIA_URL, document_root = settings.MEDIA_ROOT)

@@ -1,0 +1,114 @@
+{% extends 'dashboard.html' %}
+
+
+{% block content %}
+<div class="main-section-header d-flex">
+    <h5 class="title">All Posts</h5>
+    <a href="{% url 'admin_author_create' %}" class="btn btn-add">
+        Add Author
+    </a>
+</div>
+
+
+<div class="content-holder d-flex">
+    <div class="filter">
+        <div class="section-heading">
+            <h6 class="title">
+                FILTER
+            </h6>
+        </div>
+
+        <div class="authors">
+            <div class="section-heading">
+                <h6 class="title">
+                    Status
+                </h6>
+            </div>
+
+            <ul class="filter-list">
+                <li>
+                    <a href="" class="d-flex">
+                        <span class="label">All</span>
+                    </a>
+                </li>
+                <li>
+                    <a href="" class="d-flex">
+                        <span class="label">Active</span>
+                    </a>
+                </li>
+                <li>
+                    <a href="" class="d-flex">
+                        <span class="label">Blocked</span>
+                    </a>
+                </li>
+            </ul>
+        </div>
+    </div>
+
+    <div class="content">
+        
+        {% for author in authors %}
+        
+        <div class="single-item d-flex pb-4">
+            <img src="{% if author.user_id.profile_pic %} {{ author.user_id.profile_pic.url }} {% endif %}" alt="" class="post-img circle">
+            <div class="post-info">
+                <div class="post-title  mb-3">
+                    <a href="{% url 'admin_author_update' author.user_id.id %}">
+                        <h3 class="title"> 
+                            
+                            {% if author.name %}
+                                {{ author.name }}
+
+                                {% else %}
+
+                                {{ author.user_id.first_name }} {{ author.user_id.last_name }} 
+                            {% endif %}
+                                
+                        </h3>
+                    </a>
+                </div>
+                <div class="meta">
+                    <span class="author_name"> joined on</span> <span class="date"> {{ author.user_id.date_joined }} </span>
+                </div>
+            </div>
+
+            <div class="followers">
+                15
+            </div>
+
+            <div class="total-posts">
+                4
+            </div>
+            
+            
+            {% if not author.is_blocked %}
+                <a href="{% url 'admin_block_author' author.user_id.id %}" class="btn btn-block bg-danger">
+                    Block
+                </a>
+            {% endif %}
+                
+        </div>
+
+        {% endfor %}
+            
+
+        {% if is_paginated %}
+            <div class="pagination pt-4 d-flex justify-content-center">
+                <span class="page-links">
+                    {% if page_obj.has_previous %}
+                        <a href="/admin/post/?page={{ page_obj.previous_page_number }}">previous</a>
+                    {% endif %}
+                    <span class="page-current px-4">
+                        Page {{ page_obj.number }} of {{ page_obj.paginator.num_pages }}.
+                    </span>
+                    {% if page_obj.has_next %}
+                        <a href="/admin/post?page={{ page_obj.next_page_number }}">next</a>
+                    {% endif %}
+                </span>
+            </div>
+        {% endif %}
+
+    </div>
+</div>
+
+{% endblock content %}

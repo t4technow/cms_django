@@ -12,6 +12,12 @@
                <h3 class="title pb-3">
                   Login to see what you like
                </h3>
+               <div class="form-response">
+                     
+                  {{ messages.success }}
+                     
+                  
+               </div>
                <form class="rt-contact-form subscribe-form rt-form pt-5 px-3" method="post">
                 {% csrf_token %}
                   <div class="rt-form-group mb-4">

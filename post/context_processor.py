@@ -1,10 +1,11 @@
 from .models import Post, Category, Tag
 from author.models import Author
+from django.db.models import Count, Q
 
 def commonContext(request):
     trending_posts = Post.objects.filter(content_type = 'post').order_by('updated_at')
-    categories = Category.objects.all().order_by('title')
-    tags = Tag.objects.all().order_by('title')
+    categories = Category.objects.filter(Q(post_category__content_type = 'post') | Q(post_category__content_type = None)).annotate(no_of_posts = Count('post_category')).order_by('title') 
+    tags = Tag.objects.filter(Q(post_tags__content_type = 'post') | Q(post_tags__content_type = None)).annotate(no_of_posts = Count('post_tags')).order_by('title')
     authors = Author.objects.all()[:6]
     pages = Post.objects.filter(content_type = 'page')
 
@@ -15,3 +16,4 @@ def commonContext(request):
         'pages': pages,
         'tags': tags,
     }
+    

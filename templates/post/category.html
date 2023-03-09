@@ -4,8 +4,8 @@
 {% block content %}
 <h1>Category</h1>
 
-{% for post in trending_posts %}
-{{ post.title }}
+{% for category in categories %}
+<p><a href="{% url 'single_category' category.slug %}"> {{ category.title }} </a> ------>    {{ category.no_of_posts }} </p>
 {% endfor %}
 
 {% endblock content %}

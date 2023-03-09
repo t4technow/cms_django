@@ -32,10 +32,14 @@
 
             {% if sidebar %}
             <div class="search d-flex align-items-center">
+
+                
+                {% if not title %}
                 
                     <input type="search" name="search" id="search" placeholder="Search">
                     <div class="icon"><img src="{% static 'icons/search.svg' %}" alt="" class="icon"></div>
 
+                    {% endif %}
                     
                 </div>
                 
@@ -60,8 +64,8 @@
                 <div class="user">
                     <div class="username">
                         
-                        {% if user.first_name %}
-                            {{user.first_name}}
+                        {% if user.last_name %}
+                            {{user.last_name}}
                             {% else %}
                             {{user.username}}
                         {% endif %}
@@ -218,7 +222,7 @@
                             </a>
                         </li>
                         <li>
-                            <a href="" class="d-flex">
+                            <a href="{% url 'admin_profile' %}" class="d-flex">
                                 <div class="icon">
                                     <svg width="33" height="33" viewBox="0 0 33 33" fill="none" xmlns="http://www.w3.org/2000/svg">
                                         <g clip-path="url(#clip0_66_593)">
@@ -249,7 +253,9 @@
         </div>
         
     </div>
-
+    
+    <script src="{% static 'js/popper.min.js' %}"></script>
+    <script src="{% static 'js/bootstrap.min.js' %}"></script>
 </body>
 </html>
 

@@ -42,6 +42,8 @@ INSTALLED_APPS = [
     'author.apps.AuthorConfig',
     'post.apps.PostConfig',
     'user.apps.UserConfig',
+    'visit_counter.apps.VisitCounterConfig',
+    'verify_email.apps.VerifyEmailConfig',
 ]
 
 MIDDLEWARE = [
@@ -52,6 +54,7 @@ MIDDLEWARE = [
     'django.contrib.auth.middleware.AuthenticationMiddleware',
     'django.contrib.messages.middleware.MessageMiddleware',
     'django.middleware.clickjacking.XFrameOptionsMiddleware',
+    'visit_counter.middleware.PageVisitMiddleware',
 ]
 
 ROOT_URLCONF = 't4technow.urls'
@@ -64,6 +67,7 @@ TEMPLATES = [
         'OPTIONS': {
             'context_processors': [
                 'post.context_processor.commonContext',
+                'visit_counter.context_processor.page_visit_context_processor',
                 'django.template.context_processors.debug',
                 'django.template.context_processors.request',
                 'django.contrib.auth.context_processors.auth',
@@ -178,3 +182,13 @@ TINYMCE_DEFAULT_CONFIG = {
 
 TINYMCE_JS_URL = "https://cdn.tiny.cloud/1/no-api-key/tinymce/6/tinymce.min.js";
 TINYMCE_COMPRESSOR = False;
+
+
+# Email
+EMAIL_BACKEND = 'django.core.mail.backends.smtp.EmailBackend'
+
+EMAIL_USE_TLS = True
+EMAIL_HOST = 'smtp.gmail.com'
+EMAIL_HOST_USER = 't4mag.activation@gmail.com'
+EMAIL_HOST_PASSWORD = 'bqvwtxsgphewwbcu'
+EMAIL_PORT = 587

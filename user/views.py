@@ -1,13 +1,16 @@
-from django.views.generic import TemplateView, CreateView, UpdateView, DetailView
+from django.views.generic import TemplateView, CreateView, UpdateView, DetailView, View
 from django.contrib.auth.views import LoginView 
 from django.urls import reverse_lazy
+from django.shortcuts import redirect
 
 from .models import User
 from author.models import Author
 
 from .forms import LoginForm, UserCreationForm
-# Create your views here.
 
+
+# For Email Verification
+from verify_email.email_handler import send_verification_email
 
 
 class Home(TemplateView):
@@ -28,6 +31,14 @@ class UserCreateView(CreateView):
     form_class = UserCreationForm
     success_url = reverse_lazy('user_login')
     template_name = "user/register.html"
+    
+    def form_valid(self, form):
+        send_verification_email(self.request, form)
+        return redirect('/user/verify_email')
+
+
+class VerifyEmail(TemplateView):
+    template_name = "user/verify-email.html"
 
 
 class UserUpdateView(UpdateView):
@@ -46,8 +57,8 @@ class AuthorRequestView(CreateView):
     def form_valid(self, form):
         form.instance.user_id = self.request.user
         return super().form_valid(form)
-
-
+    
+    
 
 class Profile(DetailView):
     model = User

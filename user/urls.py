@@ -10,4 +10,5 @@ urlpatterns = [
     path('become-author/', AuthorRequestView.as_view(), name='become_author'),
     path('profile/<pk>', Profile.as_view(), name='user_profile'),
     path('update/<pk>/', UserUpdateView.as_view(), name='update_user'),
+    path('verify-email/', VerifyEmail.as_view(), name='verify_email'),
 ]

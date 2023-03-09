@@ -1,0 +1,26 @@
+{% extends 'dashboard.html' %}
+
+{% load static %}
+
+{% block content %}
+    <div class="cover d-flex" style="background-image: url({% static 'images/banner/banner_4.jpg' %});">
+        <div class="info d-flex">
+            <div class="profile_pic">
+                <img src="{{ user.profile_pic.url }}" alt="">
+            </div>
+            <h2 class="title mt-4">
+                {% if user.first_name %}
+                    {{ user.first_name | title }} {{ user.last_name | title }} 
+
+                    {% else %}
+                    {{ user.username | title }}
+                {% endif %}
+            </h2>
+        </div>
+
+        <div class="edit">
+            <a href="{% url 'admin_profile_update' user.id %}" class="btn btn-outline-light">Edit</a>
+        </div>
+    </div>
+{% endblock content %}
+    
