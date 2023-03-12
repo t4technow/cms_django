@@ -13,7 +13,7 @@
         <button class="nav-link" id="read-tab" data-bs-toggle="tab" data-bs-target="#read" type="button" role="tab" aria-controls="read" aria-selected="false">Pending Requests</button>
     </li>
     <li class="nav-item" role="presentation">
-        <button class="nav-link" id="declined-tab" data-bs-toggle="tab" data-bs-target="#declined" type="button" role="tab" aria-controls="declined" aria-selected="false">Declined Requests</button>
+        <button class="nav-link" id="declined-tab" data-bs-toggle="tab" data-bs-target="#declined" type="button" role="tab" aria-controls="declined" aria-selected="false">Approved Requests</button>
     </li>
 </ul>
 
@@ -32,7 +32,7 @@
                         </div>
                     </a>
 
-                    <a href="{% url 'admin_notification_details' request.id %}" class="w-100">
+                    <a href="{% url 'admin_notification_details' request.user_id.id %}" class="w-100">
                         <span class="username">{{ request.name }}</span> would like to become an author
                     </a>
                 </li>
@@ -49,7 +49,7 @@
                         </div>
                     </a>
 
-                    <a href="{% url 'admin_notification_details' request.id %}" class="w-100">
+                    <a href="{% url 'admin_notification_details' request.user_id.id %}" class="w-100">
                         <span class="username">{{ request.name }}</span> would like to become an author
                     </a>
                 </li>
@@ -57,7 +57,7 @@
 
         </div>
         <div class="tab-pane fade" id="declined" role="tabpanel" aria-labelledby="declined-tab">
-            {% for request in declined %}
+            {% for request in approved %}
                 <li class="d-flex  p-4 my-1">
                     <a href="" class="me-5">
                         <div class="user_image">
@@ -65,7 +65,7 @@
                         </div>
                     </a>
 
-                    <a href="{% url 'admin_notification_details' request.id %}" class="w-100">
+                    <a href="{% url 'admin_notification_details' request.user_id.id %}" class="w-100">
                         <span class="username">{{ request.name }}</span> would like to become an author
                     </a>
                 </li>

@@ -33,9 +33,12 @@ class AdminLogout(LogoutView):
 class Dashboard(PermissionRequiredMixin, TemplateView):
     template_name = "admin/home.html"
     permission_required = 'User.is_superuser'
+    extra_context = {'sidebar': True}
+    
     
     def handle_no_permission(self):
         return redirect('admin_login')
+
 
 
 # Post Management
@@ -49,7 +52,7 @@ class PostListView(PermissionRequiredMixin, PostListView):
     
 class PostCreateView(PermissionRequiredMixin, PostCreation):
     permission_required = 'User.is_superuser'
-    success_url = reverse_lazy('admin')
+    success_url = reverse_lazy('admin_posts')
     template_name = 'admin/post/create.html'
     
     def handle_no_permission(self):
@@ -58,7 +61,7 @@ class PostCreateView(PermissionRequiredMixin, PostCreation):
 
 class PostUpdateView(PermissionRequiredMixin, PostUpdateView):
     permission_required = 'User.is_superuser'
-    success_url = reverse_lazy('admin')
+    success_url = reverse_lazy('admin_posts')
     
     def handle_no_permission(self):
         return redirect('admin_login')
@@ -74,23 +77,12 @@ class PageListView(PermissionRequiredMixin, PageListView):
         return redirect('admin_login')
     
 
-class PageCreateView(CreateView):
-    model = Post
-    fields = ['title', 'body', 'excerpt', 'author', 'visibility',]
-    template_name = "admin/add.html"
-    success_url = reverse_lazy('admin')
-
-    def form_valid(self, form):
-        
-        title = form.cleaned_data['title']
-        slug = slugify(title)
-        form.instance.slug = slug
-        
-        form.instance.content_type = 'page'
-
-        form.instance.allow_comments = 'no comments'
-        
-        return super().form_valid(form)
+class PageCreateView(PageCreateView, PermissionRequiredMixin):
+    permission_required = 'User.is_superuser'
+    success_url = reverse_lazy('admin_pages')
+    
+    def handle_no_permission(self):
+        return redirect('admin_login')
 
 
 # Author Management
@@ -108,7 +100,7 @@ class AuthorCreateView(CreateView):
     model = Author
     form_class = AuthorCreationForm
     template_name = "admin/add.html"
-    success_url = reverse_lazy('admin')
+    success_url = reverse_lazy('admin_authors')
     
     def form_valid(self, form):
         form.instance.is_approved = True
@@ -120,14 +112,14 @@ class AuthorUpdateView(UpdateView):
     fields = '__all__'
     template_name = "admin/update.html"
 
-    success_url = reverse_lazy('admin')
+    success_url = reverse_lazy('admin_authors')
 
 class BlockAuthor(UpdateView):
     model = Author
     fields = ['name',]
     template_name = "admin/update.html"
 
-    success_url = reverse_lazy('admin')
+    success_url = reverse_lazy('admin_authors')
     
     def form_valid(self, form):
         form.instance.is_blocked = True

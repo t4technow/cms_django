@@ -31,7 +31,7 @@
                         {% if author.is_approved %}
                         
                             <li>
-                                <a href="" class="d-flex">
+                                <a href="{% url 'admin_posts_by_author' author.id %}" class="d-flex">
                                     <span class="label">{{ author.name }}</span>
                                     <span class="count ms-auto">15</span>
                                 </a>
@@ -56,7 +56,7 @@
                     {% for category in categories %}
                     
                         <li>
-                            <a href="" class="d-flex">
+                            <a href="{% url 'admin_posts_by_category' category.slug %}" class="d-flex">
                                 <span class="label">{{ category.title }}</span>
                                 <span class="count ms-auto">{{ categories.count }}</span>
                             </a>
@@ -78,7 +78,7 @@
                     {% for tag in tags %}
     
                         <li>
-                            <a href="" class="d-flex">
+                            <a href="{% url 'admin_posts_by_tags' tag.slug %}" class="d-flex">
                                 <span class="label">{{ tag.title }}</span>
                                 <span class="count ms-auto">16</span>
                             </a>
@@ -116,6 +116,33 @@
                 <option value="publish">Published</option>
                 <option value="draft">Draft</option>
             </select>
+            <!-- Button trigger modal -->
+            <button type="button" class="btn btn-outline-danger" data-bs-toggle="modal" data-bs-target="#{{post.slug}}">
+                Delete
+            </button>
+            
+            <!-- Modal -->
+            <div class="modal fade" id="{{post.slug}}" tabindex="-1" aria-labelledby="{{post.slug}}Label" aria-hidden="true">
+                <div class="modal-dialog modal-dialog-centered">
+                <div class="modal-content">
+                    <form action="{% url 'admin_post_delete' post.slug %}" method="post">
+                        {% csrf_token %}
+                        <div class="modal-header">
+                            <h5 class="modal-title" id="{{post.slug}}Label">Confirm deletion</h5>
+                            <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+                        </div>
+                        <div class="modal-body">
+                            Are you sure you want to delete {{ post.title }} ?
+                        </div>
+                        <div class="modal-footer">
+                            <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Cancel</button>
+                            <button type="submit" class="btn btn-danger">Confirm</button>
+                        </div>
+                    </form>
+                </div>
+                </div>
+            </div>
+
         </div>
 
         {% endfor %}

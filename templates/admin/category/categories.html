@@ -1,37 +1,13 @@
 {% extends 'dashboard.html' %}
 
 {% load static %}
+{% load replace %}
 
 {% block content %}
     <div class="row">
         <div class="col-6 px-5">
 
-          <div class="add-item" id="add-item">
-            <div class="subscribe-box-style-1 pb-5" data-bg-image="media/elements/element_5.png">
-              <div class="subscribe-content login-form">
-                <div class="main-section-header d-flex">
-                  <h5 class="title">
-                    Add New Category
-                  </h5>
-                  <div class="close"  id="close-add">
-                    <img src="{% static 'icons/close.svg' %}" alt="" class="icon">
-                  </div>
-              </div> 
-                 
-                 
-                 <form class="rt-contact-form subscribe-form rt-form px-3" method="post">
-                  {% csrf_token %}
-                    <div class="rt-form-group mb-4">
-                       <input type="text" class="form-control">
-                    </div>
-                    <div class="rt-form-group mb-4">
-                      <input type="text" class="form-control">
-                    </div>
-                    <button type="submit" class="rt-submit-btn mt-3">Add</button>
-                 </form>
-              </div>
-            </div>
-          </div>
+          {% include 'admin/category/add.html' %}
 
             <div class="main-section-header d-flex">
                 <h5 class="title">All Categories</h5>
@@ -62,7 +38,7 @@
                         </td>
                         <td>{{ category.no_of_posts }}</td>
                         <td>
-                            <a href=" {% url 'admin_category_delete' category.slug %} ">
+                            <a href=" {% url 'admin_category_delete' category.slug %} " class="btn btn-outline-danger">
                                 Delete
                             </a>
                         </td>
@@ -94,9 +70,13 @@
                           </div>
                           <div class="media-body text-right">
                             <span>Most Posts</span>
-                            <h3>278</h3>
-                            <span> cat </span>
+                            
+                            {% for cat in most_posted_cat %}
+                              <h3>{{ cat.title }}</h3>
+                              <span> {{ cat.no_of_posts }} </span>
+                            {% endfor %}
                           </div>
+                          
                         </div>
                       </div>
                     </div>
@@ -112,8 +92,14 @@
                           </div>
                           <div class="media-body text-right">
                             <span>Most Visited</span>
-                            <h3>156</h3>
-                            <span>cat</span>
+                            
+                            {% for cat in most_visited_cat %}
+                              
+                              <h3> {% replace_category cat.url %} </h3>
+                              <span>{{ cat.count }}</span>
+
+                            {% endfor %}
+                              
                           </div>
                         </div>
                       </div>

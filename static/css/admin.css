@@ -539,3 +539,20 @@ tbody, td, tfoot, th, thead, tr {
     top: 1rem;
     right: 1rem;
 }
+
+.table>:not(caption)>*>* {
+    vertical-align: middle !important;
+}
+
+.modal {
+    backdrop-filter: blur(3px);
+}
+
+.modal-content {
+    background-color: var(--secondary-color);
+}
+
+.modal-header,
+.modal-footer {
+    border: none;
+}

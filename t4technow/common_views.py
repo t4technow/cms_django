@@ -20,8 +20,20 @@ class PostListView(ListView):
     paginate_by = 4
     extra_context = {'sidebar': True}
     
+    def dispatch(self, request, *args, **kwargs):
+        self.filter_by = kwargs.pop('filter_by', None)
+        self.slug = kwargs.pop('slug', None)
+        return super().dispatch(request, *args, **kwargs)
+    
+    
     def get_queryset(self):
-        queryset = Post.objects.filter(content_type = 'post')
+        queryset = Post.objects.filter(content_type = 'post').order_by('-updated_at')
+        if self.filter_by == 'author':
+            queryset = queryset.filter(author__id = self.slug)
+        elif self.filter_by == 'category':
+            queryset = queryset.filter(category__slug = self.slug)
+        elif self.filter_by == 'tags':
+            queryset = queryset.filter(tags__slug = self.slug)
         return queryset
     
 
@@ -40,6 +52,7 @@ class PostCreation(CreateView):
             
         author = Author.objects.get(user_id = self.request.user.id)
         form.instance.author = author
+        
         return super().form_valid(form)
     
 
@@ -49,13 +62,15 @@ class PostUpdateView(UpdateView):
     template_name = "admin/post/create.html"
     extra_context = {'page_title': 'Update Post : '}
     context_object_name = 'post'
-    success_url = reverse_lazy('admin')
+    success_url = reverse_lazy('admin_posts')
 
 
 class PostDeleteView(DeleteView):
     model = Post
-    template_name = "admin/confirm.html"
-    success_url = reverse_lazy('admin')
+    success_url = reverse_lazy('admin_posts')
+
+    def get(self, request, *args, **kwargs):
+        return self.post(request, *args, **kwargs)
 
 
 # Page Management
@@ -73,36 +88,54 @@ class PageListView(ListView):
 
 class PageCreateView(CreateView):
     model = Post
-    fields = ['title', 'body', 'excerpt', 'author', 'visibility',]
-    template_name = "admin/add.html"
-    success_url = reverse_lazy('admin')
+    form_class = CreatePageForm
+    template_name = "admin/post/create.html"
+    success_url = reverse_lazy('admin_pages')
+    extra_context = {'page_title': 'new page'}
+    
 
     def form_valid(self, form):
         
         title = form.cleaned_data['title']
         slug = slugify(title)
         form.instance.slug = slug
-        
         form.instance.content_type = 'page'
-
         form.instance.allow_comments = 'no comments'
+
+        author = Author.objects.get(user_id = self.request.user.id)
+        form.instance.author = author
         
         return super().form_valid(form)
 
 
 class PageUpdateView(UpdateView):
     model = Post
-    fields = '__all__'
-    template_name = "admin/update.html"
+    form_class = CreatePageForm
+    template_name = "admin/post/create.html"
 
-    success_url = reverse_lazy('admin')
+    success_url = reverse_lazy('admin_pages')
+    
+    
+    def form_valid(self, form):
+        
+        title = form.cleaned_data['title']
+        slug = slugify(title)
+        form.instance.slug = slug
+        form.instance.content_type = 'page'
+        form.instance.allow_comments = 'no comments'
+
+        author = Author.objects.get(user_id = self.request.user.id)
+        form.instance.author = author
+        
+        return super().form_valid(form)
 
 
 class PageDeleteView(DeleteView):
     model = Post
-    template_name = "admin/confirm.html"
-    success_url = reverse_lazy('admin')
+    success_url = reverse_lazy('admin_pages')
 
+    def get(self, request, *args, **kwargs):
+        return self.post(request, *args, **kwargs)
 
 # Category Management
 # class CategoryListView(ListView):
@@ -112,18 +145,15 @@ class PageDeleteView(DeleteView):
 #     extra_context = {'sidebar': True}
     
 
-class CategoryListView(TemplateView):
-    template_name = "admin/category/categories.html"
-    extra_context = {'sidebar': True}
-
 
 
 class CategoryCreateView(CreateView):
     model = Category
     form_class = CategoryCreationForm
-    template_name = "admin/add.html"
-    success_url = reverse_lazy('admin')
-    
+    template_name = "admin/category/categories.html"
+    success_url = reverse_lazy('admin_categories')
+    extra_context = {'sidebar': True}
+
     def form_valid(self, form):
         title = form.cleaned_data['title']
         slug = slugify(title)
@@ -153,18 +183,13 @@ class CategoryDeleteView(DeleteView):
 #     template_name = "admin/tags.html"
 #     extra_context = {'sidebar': True}
     
-    
-class TagListView(TemplateView):
-    template_name = "admin/tags/tags.html"
-    extra_context = {'sidebar': True}
-
-
 
 class TagCreateView(CreateView):
     model = Tag
     form_class = TagCreationForm
-    template_name = "admin/add.html"
-    success_url = reverse_lazy('admin')
+    success_url = reverse_lazy('admin_tags')
+    template_name = "admin/tags/tags.html"
+    extra_context = {'sidebar': True}
     
     def form_valid(self, form):
         title = form.cleaned_data['title']
@@ -178,13 +203,13 @@ class TagUpdateView(UpdateView):
     fields = '__all__'
     template_name = "admin/update.html"
 
-    success_url = reverse_lazy('admin')
+    success_url = reverse_lazy('admin_tags')
 
 
 class TagDeleteView(DeleteView):
     model = Tag
     template_name = "admin/confirm.html"
-    success_url = reverse_lazy('admin')
+    success_url = reverse_lazy('admin_tags')
 
 
 # Profile management
@@ -210,14 +235,14 @@ class NotificationListView(ListView):
     model = Author
     context_object_name = 'notifications'
     
-    opened = Author.objects.filter(request_status = True)
-    declined = Author.objects.filter(request_status = True, is_approved = False)
+    opened = Author.objects.filter(request_status = True, is_approved = False)
+    approved = Author.objects.filter(request_status = True, is_approved = True)
 
     template_name = "admin/notifications/home.html"
     extra_context = {
         'sidebar': True,
         'opened': opened,
-        'declined': declined,
+        'approved': approved,
         }
     
     

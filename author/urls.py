@@ -1,6 +1,7 @@
 from django.urls import path
 from django.contrib.auth.views import LogoutView
 from admin.views import *
+from t4technow.common_views import *
 
 
 urlpatterns = [
@@ -11,15 +12,15 @@ urlpatterns = [
     path('post/update/<pk>/', PostUpdateView.as_view(), name='author_post_update'),
     path('post/delete/<pk>/', PostDeleteView.as_view(), name='author_post_delete'),
     
-    path('category/', CategoryListView.as_view(), name='author_categories'),
+    # path('category/', CategoryListView.as_view(), name='author_categories'),
     # path('category/<pk>/', CategoryDetailView.as_view(), name='author_category_details'),
-    path('category/create/', CategoryCreateView.as_view(), name='author_category_create'),
+    path('category/', CategoryCreateView.as_view(), name='author_categories'),
     path('category/update/<pk>/', CategoryUpdateView.as_view(), name='author_category_update'),
     path('category/update/<pk>/', CategoryDeleteView.as_view(), name='author_category_delete'),
 
-    path('tag/', TagListView.as_view(), name='author_tags'),
+    # path('tag/', TagListView.as_view(), name='author_tags'),
     # path('tag/<pk>/', TagDetailView.as_view(), name='author_tag_detail'),
-    path('tag/create/', TagCreateView.as_view(), name='author_tag_create'),
+    path('tag/', TagCreateView.as_view(), name='author_tags'),
     path('tag/update/<pk>/', TagUpdateView.as_view(), name='author_tag_update'),
     path('tag/update/<pk>/', TagDeleteView.as_view(), name='author_tag_delete'),
 

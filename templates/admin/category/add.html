@@ -1,0 +1,26 @@
+{% load static %}
+
+<div class="add-item" id="add-item">
+    <div class="subscribe-box-style-1 pb-5" data-bg-image="media/elements/element_5.png">
+      <div class="subscribe-content login-form">
+        <div class="main-section-header d-flex">
+          <h5 class="title">
+            Add New Category
+          </h5>
+          <div class="close"  id="close-add">
+            <img src="{% static 'icons/close.svg' %}" alt="" class="icon">
+          </div>
+      </div> 
+         
+         
+         <form class="rt-contact-form subscribe-form rt-form px-3" method="post">
+          {% csrf_token %}
+            <div class="rt-form-group mb-4">
+               {{ form.title }}
+            </div>
+            
+            <button type="submit" class="rt-submit-btn mt-3">Add</button>
+         </form>
+      </div>
+    </div>
+</div>

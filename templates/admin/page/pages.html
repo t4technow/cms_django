@@ -34,6 +34,34 @@
                 <option value="publish">Published</option>
                 <option value="draft">Draft</option>
             </select>
+
+            <!-- Button trigger modal -->
+            <button type="button" class="btn btn-outline-danger" data-bs-toggle="modal" data-bs-target="#{{page.slug}}">
+                Delete
+            </button>
+            
+            <!-- Modal -->
+            <div class="modal fade" id="{{page.slug}}" tabindex="-1" aria-labelledby="{{page.slug}}Label" aria-hidden="true">
+                <div class="modal-dialog modal-dialog-centered">
+                <div class="modal-content">
+                    <form action="{% url 'admin_page_delete' page.slug %}" method="post">
+                        {% csrf_token %}
+                        <div class="modal-header">
+                            <h5 class="modal-title" id="{{page.slug}}Label">Confirm deletion</h5>
+                            <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+                        </div>
+                        <div class="modal-body">
+                            Are you sure you want to delete {{ page.title }} ?
+                        </div>
+                        <div class="modal-footer">
+                            <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Cancel</button>
+                            <button type="submit" class="btn btn-danger">Confirm</button>
+                        </div>
+                    </form>
+                </div>
+                </div>
+            </div>
+
         </div>
 
         {% endfor %}

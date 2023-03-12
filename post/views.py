@@ -1,9 +1,9 @@
-from django.contrib.auth.mixins import LoginRequiredMixin
-from django.views.generic import ListView, DetailView, TemplateView, CreateView
-from django.urls import reverse_lazy
-
-from .models import Category, Post, Tag, Comment
+from django.views.generic import ListView, DetailView
+from django.http import JsonResponse
 from django.db.models import Count, Q
+from .models import Category, Post, Comment
+
+from .forms import CommentForm
 
 # Create your views here.
 
@@ -14,9 +14,8 @@ class PostListView(ListView):
     template_name = "post/home.html"
     
     def get_queryset(self):
-        queryset = Post.objects.filter(content_type = 'post')
+        queryset = Post.objects.filter(content_type = 'post').order_by('-updated_at')[0:4]
         return queryset
-    
     
 
 class PostDetailView(DetailView):
@@ -24,11 +23,47 @@ class PostDetailView(DetailView):
     context_object_name = 'post'
     template_name = "post/single.html"
     
-    
     def get_context_data(self, **kwargs):
         context = super().get_context_data(**kwargs)
+        current_post = self.object
+        queryset = self.get_queryset()
+                
+        # Get the previous post 
+        previous_post = queryset.filter(created_at__lt=current_post.created_at, content_type = 'post').order_by('-created_at').first()
+        
+        # Get the next post object
+        next_post = queryset.filter(created_at__gt=current_post.created_at, content_type = 'post').order_by('created_at').first()
+        
+        context['previous_post'] = previous_post
+        context['next_post'] = next_post
+        
+        # comments
+        comments = Comment.objects.filter(parent = None, post_id = self.object.id).order_by('-created_at')
+        
+        context['comments'] = comments
+        context['comment_form'] = CommentForm()
+        
         return context
     
+    def post(self, request, *args, **kwargs):
+        post = self.get_object()
+        form = CommentForm(request.POST)
+        if form.is_valid():
+            comment = form.save(commit=False)
+            form.instance.post_id = post            
+            form.instance.user_id = request.user
+            comment.save()
+            data = {
+                'success': True,
+                'comment': {
+                    'body': comment.body,
+                }
+            }
+        else:
+            data = {'success': False, 'errors': form.errors}
+            
+        return JsonResponse(data)
+
 
 
 class CategoryListView(ListView):
@@ -53,11 +88,3 @@ class CategoryDetailView(DetailView):
         posts = Post.objects.filter(category = cat, content_type='post')
         context['posts'] = posts
         return context
-    
-
-
-class CommentCreateView(CreateView):
-    model = Comment
-    fields = '__all__'
-    template_name = "post/comment.html"
-    success_url = reverse_lazy('add_comment')

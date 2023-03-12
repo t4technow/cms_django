@@ -11,6 +11,4 @@ urlpatterns = [
     
     # path('tags/', TagListView.as_view(), name='categories'),
     # path('tag/<slug:slug>', TagDetailsView.as_view(), name='tag_details'),
-    
-    path('comment', CommentCreateView.as_view(), name='add_comment'),
 ]

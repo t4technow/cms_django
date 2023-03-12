@@ -22,10 +22,7 @@
                  <form class="rt-contact-form subscribe-form rt-form px-3" method="post">
                   {% csrf_token %}
                     <div class="rt-form-group mb-4">
-                       <input type="text" class="form-control">
-                    </div>
-                    <div class="rt-form-group mb-4">
-                      <input type="text" class="form-control">
+                       {{ form.title }}
                     </div>
                     <button type="submit" class="rt-submit-btn mt-3">Add</button>
                  </form>
@@ -62,7 +59,7 @@
                         </td>
                         <td>{{ tag.no_of_posts }}</td>
                         <td>
-                            <a href=" {% url 'admin_tag_delete' tag.slug %} ">
+                            <a href=" {% url 'admin_tag_delete' tag.slug %} " class="btn btn-outline-danger">
                                 Delete
                             </a>
                         </td>

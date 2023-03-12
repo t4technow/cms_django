@@ -11657,3 +11657,7 @@ video {
 .circle {
     border-radius: 50%;
 }
+
+.post-body {
+    text-align: justify;
+}

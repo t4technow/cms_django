@@ -12,6 +12,10 @@ urlpatterns = [
     path('post/update/<slug:slug>/', PostUpdateView.as_view(), name='admin_post_update'),
     path('post/delete/<slug:slug>/', PostDeleteView.as_view(), name='admin_post_delete'),
     
+    path('post/filtered-by/author/<str:slug>/', PostListView.as_view(), {'filter_by': 'author'}, name='admin_posts_by_author'),
+    path('post/filtered-by/category/<str:slug>/', PostListView.as_view(), {'filter_by': 'category'}, name='admin_posts_by_category'),
+    path('post/filtered-by/tags/<str:slug>/', PostListView.as_view(), {'filter_by': 'tags'}, name='admin_posts_by_tags'),
+        
     # Page Management
     path('page/', PageListView.as_view(), name='admin_pages'),
     path('page/create/', PageCreateView.as_view(), name='admin_page_create'),
@@ -22,13 +26,13 @@ urlpatterns = [
     # path('Analytics/', Analytics.as_view(), name='admin_analytics'),
     
     # Category Management
-    path('category/', CategoryListView.as_view(), name='admin_categories'),
-    path('category/create/', CategoryCreateView.as_view(), name='admin_category_create'),
+    # path('category/', CategoryListView.as_view(), name='admin_categories'),
+    path('category/', CategoryCreateView.as_view(), name='admin_categories'),
     path('category/update/<slug:slug>/', CategoryUpdateView.as_view(), name='admin_category_update'),
     path('category/delete/<slug:slug>/', CategoryDeleteView.as_view(), name='admin_category_delete'),
 
-    path('tag/', TagListView.as_view(), name='admin_tags'),
-    path('tag/create/', TagCreateView.as_view(), name='admin_tag_create'),
+    # path('tag/', TagListView.as_view(), name='admin_tags'),
+    path('tag/', TagCreateView.as_view(), name='admin_tags'),
     path('tag/update/<slug:slug>/', TagUpdateView.as_view(), name='admin_tag_update'),
     path('tag/delete/<slug:slug>/', TagDeleteView.as_view(), name='admin_tag_delete'),
 

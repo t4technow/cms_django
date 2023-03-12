@@ -44,6 +44,7 @@ INSTALLED_APPS = [
     'user.apps.UserConfig',
     'visit_counter.apps.VisitCounterConfig',
     'verify_email.apps.VerifyEmailConfig',
+    'custom_tags.apps.CustomTagsConfig',
 ]
 
 MIDDLEWARE = [
@@ -180,7 +181,6 @@ TINYMCE_DEFAULT_CONFIG = {
     'statusbar': True,
 }
 
-TINYMCE_JS_URL = "https://cdn.tiny.cloud/1/no-api-key/tinymce/6/tinymce.min.js";
 TINYMCE_COMPRESSOR = False;
 
 
@@ -192,3 +192,12 @@ EMAIL_HOST = 'smtp.gmail.com'
 EMAIL_HOST_USER = 't4mag.activation@gmail.com'
 EMAIL_HOST_PASSWORD = 'bqvwtxsgphewwbcu'
 EMAIL_PORT = 587
+
+
+DATA_UPLOAD_MAX_MEMORY_SIZE = 1024 * 1024 * 100 # 10MB
+FILE_UPLOAD_MAX_MEMORY_SIZE = 1024 * 1024 * 100 # 10MB
+
+
+FILE_UPLOAD_HANDLERS = [
+    'django.core.files.uploadhandler.TemporaryFileUploadHandler',
+]

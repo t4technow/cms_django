@@ -6,7 +6,7 @@ from django.dispatch import receiver
 
 @receiver(pre_save, sender = Author)
 def update_request_status(sender, instance, **kwargs):
-    user = User.objects.get(id = instance.user_id)
+    user = User.objects.get(id = instance.user_id.id)
     if instance.is_approved:
         instance.request_status = True
         user.is_author = True
