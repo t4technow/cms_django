@@ -10,12 +10,147 @@
 </div> 
 
 <div class="content-holder d-flex">
+    
+
+    <div class="content">
+        
+        {% for post in posts %}
+        
+        <div class="single-item d-flex  p-2 pe-5 mb-2">
+            <img src="{% if post.featured_image %} {{ post.featured_image.url }} {% endif %}" alt="" class="post-img">
+            <div class="post-info">
+                <div class="post-category {{post.category.title | lower}} mb-3">
+                    {{post.category.title}}
+                </div>
+                <div class="post-title  mb-3">
+                    <a href="
+                    {% if '/admin/' in current_url %}
+                        {% url 'admin_post_update' post.slug %}
+                    {% else %}
+                        {% url 'author_post_update' post.slug %}
+                    {% endif %} ">
+                        <h3 class="title">{{ post.title }}</h3>
+                    </a>
+                </div>
+                <div class="meta">
+                    by <span class="author_name">{{ post.author.name }}</span> <span class="date"> {{ post.created_at }} </span>
+                </div>
+            </div>
+            <div class="views">
+                35,000
+            </div>
+            <select name="visibilty" id="visibilty">
+                <option value="publish">Published</option>
+                <option value="draft">Draft</option>
+            </select>
+            <!-- Button trigger modal -->
+            <button type="button" class="btn btn-outline-danger" data-bs-toggle="modal" data-bs-target="#{{post.slug}}">
+                Delete
+            </button>
+            
+            <!-- Modal -->
+            <div class="modal fade" id="{{post.slug}}" tabindex="-1" aria-labelledby="{{post.slug}}Label" aria-hidden="true">
+                <div class="modal-dialog modal-dialog-centered">
+                <div class="modal-content">
+                    <form action="
+                    {% if '/admin/' in current_url %}
+                        {% url 'admin_post_delete' post.slug %}
+                    {% else %}
+                        {% url 'author_post_delete' post.slug %}
+                    {% endif %}
+                    " method="post">
+                        {% csrf_token %}
+                        <div class="modal-header">
+                            <h5 class="modal-title" id="{{post.slug}}Label">Confirm deletion</h5>
+                            <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+                        </div>
+                        <div class="modal-body">
+                            Are you sure you want to delete {{ post.title }} ?
+                        </div>
+                        <div class="modal-footer">
+                            <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Cancel</button>
+                            <button type="submit" class="btn btn-danger">Confirm</button>
+                        </div>
+                    </form>
+                </div>
+                </div>
+            </div>
+
+        </div>
+
+        {% endfor %}
+            
+
+        {% if is_paginated %}
+            <div class="pagination pt-4 d-flex justify-content-center">
+                <span class="page-links">
+                    {% if page_obj.has_previous %}
+                        
+                        {% if '/admin/' in current_url %}
+                            <a href="/admin/post/?page={{ page_obj.previous_page_number }}">previous</a>
+                        {% else %}
+                            <a href="/author/post/?page={{ page_obj.previous_page_number }}">previous</a>
+                        {% endif %}
+                            
+                    {% endif %}
+                    
+                    <span class="page-current px-4">
+                        Page {{ page_obj.number }} of {{ page_obj.paginator.num_pages }}.
+                    </span>
+
+                    {% if page_obj.has_next %}
+                        {% if '/admin/' in current_url %}
+                            <a href="/admin/post?page={{ page_obj.next_page_number }}">next</a>
+                        {% else %}
+                            <a href="/author/post?page={{ page_obj.next_page_number }}">next</a>
+                        {% endif %}
+                    {% endif %}
+                </span>
+            </div>
+        {% endif %}
+
+    </div>
+
     <div class="filter">
         <div class="section-heading">
             <h6 class="title">
                 FILTER
             </h6>
+            <p class="text-danger" id="error-message"></p>
         </div>
+
+        <form action="{% url 'home' %}" method="get" id="colorForm">
+            <input type="radio" name="color" id="" value='red'> Red
+            <input type="radio" name="color" id="" value="green"> Green
+            <input type="radio" name="color" id="" value="blue"> Blue
+
+            <button id="submit1" type="submit">  submit </button>
+        </form>
+        <script>
+
+            let form = document.querySelector('#colorForm')
+            let btns = document.querySelectorAll("input[type='radio']")
+            let sub = document.getElementById("submit1")
+            let er = document.querySelector('#error-message')
+            let ok = false
+            
+            sub.addEventListener('click', (e) => {
+                e.preventDefault();
+                btns.forEach(el => {
+                    if(el.checked == true) {
+                        ok = true
+                        return ok
+                    } 
+                });
+
+                if(!ok) {
+                    er.innerHTML = 'Please select a color'
+                } else {
+                    form.submit()
+                }
+            })
+
+        </script>
 
         <div class="authors">
             <div class="section-heading">
@@ -88,82 +223,6 @@
                         
                 </ul>
         </div>
-    </div>
-
-    <div class="content">
-        
-        {% for post in posts %}
-        
-        <div class="single-item d-flex pb-4">
-            <img src="{% if post.featured_image %} {{ post.featured_image.url }} {% endif %}" alt="" class="post-img">
-            <div class="post-info">
-                <div class="post-category {{post.category.title | lower}} mb-3">
-                    {{post.category.title}}
-                </div>
-                <div class="post-title  mb-3">
-                    <a href="{% url 'admin_post_update' post.slug %}">
-                        <h3 class="title">{{ post.title }}</h3>
-                    </a>
-                </div>
-                <div class="meta">
-                    by <span class="author_name">{{ post.author.name }}</span> <span class="date"> {{ post.created_at }} </span>
-                </div>
-            </div>
-            <div class="views">
-                35,000
-            </div>
-            <select name="visibilty" id="visibilty">
-                <option value="publish">Published</option>
-                <option value="draft">Draft</option>
-            </select>
-            <!-- Button trigger modal -->
-            <button type="button" class="btn btn-outline-danger" data-bs-toggle="modal" data-bs-target="#{{post.slug}}">
-                Delete
-            </button>
-            
-            <!-- Modal -->
-            <div class="modal fade" id="{{post.slug}}" tabindex="-1" aria-labelledby="{{post.slug}}Label" aria-hidden="true">
-                <div class="modal-dialog modal-dialog-centered">
-                <div class="modal-content">
-                    <form action="{% url 'admin_post_delete' post.slug %}" method="post">
-                        {% csrf_token %}
-                        <div class="modal-header">
-                            <h5 class="modal-title" id="{{post.slug}}Label">Confirm deletion</h5>
-                            <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
-                        </div>
-                        <div class="modal-body">
-                            Are you sure you want to delete {{ post.title }} ?
-                        </div>
-                        <div class="modal-footer">
-                            <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Cancel</button>
-                            <button type="submit" class="btn btn-danger">Confirm</button>
-                        </div>
-                    </form>
-                </div>
-                </div>
-            </div>
-
-        </div>
-
-        {% endfor %}
-            
-
-        {% if is_paginated %}
-            <div class="pagination pt-4 d-flex justify-content-center">
-                <span class="page-links">
-                    {% if page_obj.has_previous %}
-                        <a href="/admin/post/?page={{ page_obj.previous_page_number }}">previous</a>
-                    {% endif %}
-                    <span class="page-current px-4">
-                        Page {{ page_obj.number }} of {{ page_obj.paginator.num_pages }}.
-                    </span>
-                    {% if page_obj.has_next %}
-                        <a href="/admin/post?page={{ page_obj.next_page_number }}">next</a>
-                    {% endif %}
-                </span>
-            </div>
-        {% endif %}
-
     </div>
 </div>
 {% endblock content %}

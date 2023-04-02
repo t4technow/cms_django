@@ -288,6 +288,8 @@ main {
     justify-content: space-between;
     align-items: center;
     flex-grow: 1;
+    background: #171818;
+	border-radius: 8px;
 }
 
 .post-img {
@@ -503,6 +505,15 @@ tbody, td, tfoot, th, thead, tr {
     -webkit-transition: all 0.3s ease;
     -moz-transition: all 0.3s ease;
     -ms-transition: all 0.3s ease;
+}
+
+.form-control:disabled, .form-control[readonly] {
+    background-color: var(--secondary-color);
+    opacity: 1;
+}
+
+input:focus-visible {
+    outline: none;
 }
 
 .close {

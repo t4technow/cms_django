@@ -19,6 +19,7 @@
 
     <!-- Custom Css -->
     <link rel="stylesheet" type="text/css" href="{% static 'css/style.css' %}">
+    <script src="{% static 'js/jquery-3.6.js' %}"></script>
 
 </head>
 
@@ -130,7 +131,7 @@
                 <div class="header-main header-main-style-1 navbar-wrap" id="navbar-wrap">
                     <div class="container">
                         <div class="row">
-                            <div class="d-flex align-items-center justify-content-between">
+                            <div class="d-flex align-items-center justify-content-between" id="nav-holder">
 
                                 <!-- start logo here -->
                                 <div class="site-branding">
@@ -211,13 +212,59 @@
                                             </li>
                                         </ul>
                                     </nav>
+
+                                    <div class="search d-flex align-items-center" id="search-form">
+                                        <input type="search" name="search" id="search" placeholder="Search">
+                                        <div class="icon"><img src="{% static 'icons/search.svg' %}" alt="" class="icon"></div>                                        
+
+                                        <div class="result" id="search-result">
+                                            <p>Please start typing to search</p> 
+                                        </div>
+                                    </div>
                                 </div>
                                 <!-- end main menu -->
-
+                                <script>
+                                    $(() => {
+                                        $('#search').keyup(() => {
+                                            var form = $(this)
+                                            var query = $('#search').val()
+                                            console.log(query)
+                                            var url = `/post/search/?search=${query}`
+                                            var method = 'get'
+                                            var result = $('#search-result')
+                                            $.ajax({
+                                                url: url,
+                                                method: method,
+                                                data: form.serialize(),
+                                                success: (response) => {
+                                                    if (response.status == 'success') {
+                                                        result.empty()
+                                                        console.log(response.searchResult)
+                                                        if(response.searchResult.length === 0){
+                                                            result.empty()
+                                                            result.append(`oops! nothing found for "${query}"`)
+                                                        } else {
+                                                            response.searchResult.map((post) => {
+                                                                result.append(`<li>
+                                                                                <a href="/post/${post.slug}"> 
+                                                                                    ${post.title} 
+                                                                                </a>
+                                                                            </li>`)
+                                                            })
+                                                        }
+                                                    } else if (response.status == 'empty') {
+                                                        result.empty()
+                                                        result.append('Please start typing to search')
+                                                    }
+                                                }
+                                            })
+                                        })
+                                    })
+                                </script>
                                 <!-- start header actions -->
                                 <ul class="header-action-items">
                                     <li class="item">
-                                        <a href="#template-search"><i class="fas fa-search"></i></a>
+                                        <a href="javascript:void(0)" id="search-toggle"><i class="fas fa-search"></i></a>
                                     </li>
                                     <li class="main-menu__nav_sub list">
                                         <a class="animation" href="javascript:void(0)">
@@ -242,7 +289,9 @@
                                                 <li><a href="">Following Authors</a></li>
                                                 
                                                 {% if user.is_author or user.is_superuser %}
-                                                    <li><a href="">Author Dashboard</a></li>
+                                                    <li><a href="{% url 'author' %}">Author Dashboard
+                                                        {{user.is_author}}
+                                                    </a></li>
                                                     
                                                     {% else %}
 
@@ -266,12 +315,7 @@
                                             {% endif %}
                                         </ul>
                                     </li>
-                                    <!-- <li class="item cart-icon">
-                                        <a href="javascript:void(0)" class="user-menu-btn menu-open-btn">
-                                            
-                                            <span class="item-count">0</span>
-                                        </a>
-                                    </li> -->
+                                    
                                     <li class="item humburger offcanvas-menu-btn menu-status-open">
                                         <span></span>
                                     </li>
@@ -718,6 +762,17 @@
 
     <!-- Dependency Script -->
     <script src="{% static 'js/app.js' %}"></script>
+
+    <script>
+        let toggler = document.querySelector('#search-toggle')
+        let nav = document.querySelector('#nav-holder')
+        let form = document.querySelector('#search-form')
+
+        toggler.addEventListener('click', (e) => {
+            e.preventDefault()
+            nav.classList.toggle('hidden-menu')
+        })
+    </script>
 </body>
 
 </html>

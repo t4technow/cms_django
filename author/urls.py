@@ -1,16 +1,22 @@
 from django.urls import path
 from django.contrib.auth.views import LogoutView
-from admin.views import *
 from t4technow.common_views import *
+from .views import *
 
 
 urlpatterns = [
     path('', Dashboard.as_view(), name='author'),
-    
     path('post/', PostListView.as_view(), name='author_posts'),
-    path('post/create/', PostCreateView.as_view(), name='author_post_create'),
+    path('post/create/', PostCreation.as_view(), name='author_post_create'),
     path('post/update/<pk>/', PostUpdateView.as_view(), name='author_post_update'),
     path('post/delete/<pk>/', PostDeleteView.as_view(), name='author_post_delete'),
+    
+        
+    # Page Management
+    path('page/', PageListView.as_view(), name='author_pages'),
+    path('page/create/', PageCreateView.as_view(), name='author_page_create'),
+    path('page/update/<slug:slug>/', PageUpdateView.as_view(), name='author_page_update'),
+    path('page/delete/<slug:slug>/', PageDeleteView.as_view(), name='author_page_delete'),
     
     # path('category/', CategoryListView.as_view(), name='author_categories'),
     # path('category/<pk>/', CategoryDetailView.as_view(), name='author_category_details'),

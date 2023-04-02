@@ -29,7 +29,7 @@ def update_author_status(sender, instance, **kwargs):
             if not author.is_approved:
                 author.is_approved = True
                 author.save()
-    # else:
-    #     if instance.is_superuser:
-    #         Author.objects.create(user_id = instance, is_approved = True)
-    #         Author.save()
+    else:
+        if instance.is_superuser:
+            Author.objects.create(user_id = instance, is_approved = True)
+            Author.save()

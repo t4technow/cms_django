@@ -22,5 +22,63 @@
             <a href="{% url 'admin_profile_update' user.id %}" class="btn btn-outline-light">Edit</a>
         </div>
     </div>
+
+
+    <div class="row justify-content-center py-3">
+    
+        <div class="">
+            <div class="subscribe-box-style-1" data-bg-image="media/elements/element_5.png">
+                <div class="subscribe-content login-form">
+                    <form method="post" class="rt-contact-form subscribe-form rt-form pt-5 px-3">
+                    {% csrf_token %}
+                    
+                    <div class="row col-12 m-0">
+    
+                        <div class="col-6 ps-0">
+                            <div class="rt-form-group mb-4">
+                                <label for="first_name">First Name</label>
+                                <input type="text" class="form-control" id='first_name' value="{{ user.first_name }}" disabled>    
+                            </div>
+                        </div>
+        
+                        <div class="col-6 pe-0">
+                            <div class="rt-form-group mb-4">
+                                <label for="last_name">Last Name</label>
+                                <input type="text" class="form-control" id='last_name' value="{{ user.last_name }}" disabled>    
+                            </div>
+                        </div>
+                    </div>
+    
+                                    
+                    <div class="rt-form-group mb-4">
+                        <label for="uesr_name">User Name</label>
+                                <input type="text" class="form-control" id='user_name' value="{{ user.username }}" disabled>
+                      </div>
+                      <div class="rt-form-group mb-4">
+                        <label for="email">Email</label>
+                                <input type="text" class="form-control" id='email' value="{{ user.email }}" disabled>
+                     </div>
+    
+                     <div class="row col-12 m-0">
+    
+                        <div class="col-6 ps-0">
+                            <div class="rt-form-group mb-4">
+                                {{ form.password1 }}
+                            </div>
+                        </div>
+        
+                        <div class="col-6 pe-0">
+                            <div class="rt-form-group mb-4">
+                                {{ form.password2 }}
+                            </div>
+                        </div>
+                    </div>
+    
+                    
+                   </form>
+                </div>
+            </div>
+        </div>
+    </div>
 {% endblock content %}
     

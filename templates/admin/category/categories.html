@@ -32,13 +32,25 @@
                     
                         <tr>
                         <td class="ms-3">
-                            <a href=" {% url 'admin_category_update' category.slug %} ">
+                            <a href="
+                              {% if '/admin/' in current_url %}
+                                  {% url 'admin_category_update' category.slug %}
+                              {% else %}
+                                  {% url 'author_category_update' category.slug %}
+                              {% endif %}
+                            ">
                                 {{category.title}}
                             </a>
                         </td>
                         <td>{{ category.no_of_posts }}</td>
                         <td>
-                            <a href=" {% url 'admin_category_delete' category.slug %} " class="btn btn-outline-danger">
+                            <a href="
+                              {% if '/admin/' in current_url %}
+                                  {% url 'admin_category_delete' category.slug %}
+                              {% else %}
+                                  {% url 'author_category_delete' category.slug %}
+                              {% endif %}
+                            " class="btn btn-outline-danger">
                                 Delete
                             </a>
                         </td>

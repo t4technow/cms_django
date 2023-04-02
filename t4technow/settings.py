@@ -45,6 +45,7 @@ INSTALLED_APPS = [
     'visit_counter.apps.VisitCounterConfig',
     'verify_email.apps.VerifyEmailConfig',
     'custom_tags.apps.CustomTagsConfig',
+    'rest_framework',  
 ]
 
 MIDDLEWARE = [
@@ -189,8 +190,8 @@ EMAIL_BACKEND = 'django.core.mail.backends.smtp.EmailBackend'
 
 EMAIL_USE_TLS = True
 EMAIL_HOST = 'smtp.gmail.com'
-EMAIL_HOST_USER = 't4mag.activation@gmail.com'
-EMAIL_HOST_PASSWORD = 'bqvwtxsgphewwbcu'
+EMAIL_HOST_USER = 'admn.t4mag@gmail.com'
+EMAIL_HOST_PASSWORD = 'qrfuuyxinzifvzka'
 EMAIL_PORT = 587
 
 

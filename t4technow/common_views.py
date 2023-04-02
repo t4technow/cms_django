@@ -1,5 +1,4 @@
 from django.views.generic import TemplateView, ListView, CreateView, UpdateView, DeleteView, DetailView
-from django.contrib.auth.mixins import PermissionRequiredMixin, LoginRequiredMixin
 
 from django.urls import reverse_lazy
 from django.utils.text import slugify
@@ -224,7 +223,7 @@ class Profile(TemplateView):
 
 class ProfileUpdateView(UpdateView):
     model = User
-    fields = '__all__'
+    fields = ['first_name', 'last_name', 'username', 'email', 'profile_pic']
     template_name = "admin/update.html"
 
     success_url = reverse_lazy('admin_profile')

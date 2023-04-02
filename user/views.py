@@ -2,6 +2,7 @@ from django.views.generic import TemplateView, CreateView, UpdateView, DetailVie
 from django.contrib.auth.views import LoginView 
 from django.urls import reverse_lazy
 from django.shortcuts import redirect
+from django.contrib import messages
 
 from .models import User
 from author.models import Author
@@ -33,9 +34,12 @@ class UserCreateView(CreateView):
     template_name = "user/register.html"
     
     def form_valid(self, form):
-        send_verification_email(self.request, form)
-        return redirect('/user/verify_email')
-
+        try:
+            send_verification_email(self.request, form)
+            return redirect('verify_email')
+        except:
+            messages.error(self.request, 'sorry something went wrong please try again')
+            return redirect('user_registration')
 
 class VerifyEmail(TemplateView):
     template_name = "user/verify-email.html"

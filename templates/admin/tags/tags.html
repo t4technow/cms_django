@@ -53,13 +53,23 @@
                     
                         <tr>
                         <td class="ms-3">
-                            <a href=" {% url 'admin_tag_update' tag.slug %} ">
+                            <a href="
+                            {% if '/admin/' in current_url %}
+                                {% url 'admin_tag_update' tag.slug %}
+                            {% else %}
+                                {% url 'author_tag_update' tag.slug %}
+                            {% endif %} ">
                                 {{tag.title}}
                             </a>
                         </td>
                         <td>{{ tag.no_of_posts }}</td>
                         <td>
-                            <a href=" {% url 'admin_tag_delete' tag.slug %} " class="btn btn-outline-danger">
+                            <a href="
+                              {% if '/admin/' in current_url %}
+                                  {% url 'admin_tag_delete' tag.slug %}
+                              {% else %}
+                                  {% url 'author_tag_delete' tag.slug %}
+                              {% endif %} " class="btn btn-outline-danger">
                                 Delete
                             </a>
                         </td>

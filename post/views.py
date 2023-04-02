@@ -1,8 +1,12 @@
 from django.views.generic import ListView, DetailView
+from rest_framework.views import APIView  
+from rest_framework.response import Response  
+from rest_framework import status  
 from django.http import JsonResponse
 from django.db.models import Count, Q
 from .models import Category, Post, Comment
 
+from .serializers import PostSerializer
 from .forms import CommentForm
 
 # Create your views here.
@@ -16,7 +20,18 @@ class PostListView(ListView):
     def get_queryset(self):
         queryset = Post.objects.filter(content_type = 'post').order_by('-updated_at')[0:4]
         return queryset
-    
+
+
+class PostSearchView(APIView):
+    def get(self, request, *args, **kwargs):  
+        url_parameter = request.GET.get("search")
+        if url_parameter != '':
+            result = Post.objects.filter(content_type = 'post', title__icontains = url_parameter) 
+            serializers = PostSerializer(result, many=True)  
+            return Response({'status': 'success', "searchResult":serializers.data}, status=200) 
+        else:
+            return Response({'status': 'empty', "searchResult": ['type to search',]})
+
 
 class PostDetailView(DetailView):
     model = Post
@@ -57,6 +72,8 @@ class PostDetailView(DetailView):
                 'success': True,
                 'comment': {
                     'body': comment.body,
+                    'user': comment.user_id.username,
+                    'created_at': comment.created_at
                 }
             }
         else:

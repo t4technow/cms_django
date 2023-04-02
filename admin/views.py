@@ -49,6 +49,18 @@ class PostListView(PermissionRequiredMixin, PostListView):
     def handle_no_permission(self):
         return redirect('admin_login')
     
+    def post(self, request):
+        query = request.POST['search']
+        queryset = Post.objects.filter(title__icontains = query)
+        if queryset:
+            extra_context = self.extra_context.copy()
+            extra_context['filtered_users'] = queryset
+        else:
+            extra_context = {'NotFound': 'NotFound'}
+        self.extra_context = extra_context
+        
+        return self.get(request)
+    
     
 class PostCreateView(PermissionRequiredMixin, PostCreation):
     permission_required = 'User.is_superuser'

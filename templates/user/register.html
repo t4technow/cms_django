@@ -12,6 +12,11 @@
                <h3 class="title pb-3">
                   Sign up to enjoy a tailored Experience
                </h3>
+               
+               {% for message in messages.error %}
+                    {{ message }}
+               {% endfor %}
+                
                <form method="post" class="rt-contact-form subscribe-form rt-form pt-5 px-3">
                 {% csrf_token %}
                 
